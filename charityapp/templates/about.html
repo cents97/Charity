@@ -1,0 +1,850 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    
+/* Welcome Section Styling */
+.welcome-section {
+    display: flex;
+    flex-direction: column; /* Stack image and content vertically */
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+/* Image Styling */
+.welcome-section .side-image {
+    width: 100%;
+    max-width: 800px; /* Adjust the maximum width of the image */
+    max-height: 400px; /* Set a maximum height for the image */
+    margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.welcome-section .side-image img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 15px;
+}
+
+/* Welcome Text Styling */
+.welcome-section .content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: justify;
+    letter-spacing: 0.5px;
+}
+
+/* Section Styling */
+.section {
+    padding: 50px 20px;
+    background-color: #f9f9f9; /* Soft background color for a modern look */
+    text-align: center;
+    margin-top: 50px;
+}
+
+.content h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* Cards Container */
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+/* Card Styling */
+.card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 30%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #444;
+    text-align: left;
+    position: relative;
+    min-height: 300px;
+}
+
+/* Card Hover Effect */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.card-header i {
+    font-size: 30px;
+    color: #00aaff; /* Bright, attractive color for icons */
+    margin-right: 15px;
+}
+
+.card-header h3 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Card Content */
+.card p, .card ul {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card li {
+    margin-bottom: 15px;
+    font-size: 16px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.card li:before {
+    content: "\f00c";  /* Checkmark icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #00aaff;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Founder Message Section */
+.founder-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px 40px;
+    background-color: #ffffff; /* White background for a clean and professional feel */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+    margin: 50px auto;
+    max-width: 1200px;
+    text-align: center;
+}
+
+/* Founder Image */
+.founder-image {
+    flex: 1;
+    max-width: 350px;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Darker shadow for more prominence */
+}
+
+.founder-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Founder Content */
+.founder-content {
+    flex: 2;
+    padding: 20px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.8;
+}
+
+.founder-content h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+.founder-content p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.founder-content strong {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0073e6; /* Bright blue to highlight the name */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .founder-message {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .founder-image {
+        margin-bottom: 20px;
+    }
+
+    .founder-content {
+        padding: 20px;
+    }
+
+    .founder-content h2 {
+        font-size: 30px;
+    }
+
+    .founder-content p {
+        font-size: 16px;
+    }
+}
+/* History & Background Section */
+.history-background {
+    padding: 50px 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Heading */
+.history-background h2 {
+    font-size: 36px;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Paragraphs */
+.history-background p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+/* Strong text */
+.history-background strong {
+    color: #0073e6; /* Accent color for emphasis */
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .history-background {
+        padding: 30px 15px;
+    }
+
+    .history-background h2 {
+        font-size: 28px;
+    }
+
+    .history-background p {
+        font-size: 16px;
+    }
+}
+
+
+/* Vision & Mission Container */
+.vision-mission-container {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f8f9fa;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+/* Vision & Mission Section */
+.vision-mission-section {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Vision & Mission Boxes */
+.vision, .mission {
+    flex: 1;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 50px;
+    text-align: center;
+    color: white;
+}
+
+/* Vision Section with Background Image */
+.vision {
+    background: url('/static/img/c1.jpg') center/cover no-repeat;
+    position: relative;
+}
+
+/* Dark Overlay on Vision Section */
+.vision .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Darken background for better text visibility */
+}
+
+/* Mission Section with Solid Color */
+.mission {
+    background-color: #1909ff; /* Green */
+}
+
+/* Content Box */
+.conten {
+    position: relative;
+    max-width: 500px;
+    z-index: 2;
+}
+
+/* Title Styling */
+.conten h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+    color: white;
+}
+
+/* Paragraph Styling */
+.conten p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: white;
+}
+
+/* Icons */
+.conten i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #FFD700; /* Gold Color for Icons */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .vision-mission-section {
+        flex-direction: column;
+    }
+}
+
+.objectives-section {
+        text-align: center;
+        padding: 50px;
+        background-color: #f8f9fa; /* Light background */
+    }
+
+    .objectives-section h2 {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .objectives-section p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+    .objectives-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .objective-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 350px; /* Increase card size */
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .objective-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .objective-card i {
+        font-size: 40px;
+        color: #007bff; /* Icon color */
+        margin-bottom: 15px;
+    }
+
+    .objective-card h3 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .objective-card p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .strategies-section {
+        text-align: center;
+        padding: 50px;
+        background-color: #eef3f7; /* Light gray background */
+    }
+
+    .strategies-section h2 {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .strategies-section p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+    .strategies-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .strategy-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 400px; /* Slightly larger than objectives */
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .strategy-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .strategy-card i {
+        font-size: 45px;
+        color: #28a745; /* Green for a growth-focused theme */
+        margin-bottom: 15px;
+    }
+
+    .strategy-card h3 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .strategy-card p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .programs-initiatives {
+        text-align: center;
+        padding: 4rem 0;
+        background: #f8f9fa;
+    }
+    .programs-initiatives h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+    }
+    .programs-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+    .program-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .program-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2980b9;
+        margin-bottom: 1rem;
+    }
+    .card-header i {
+        font-size: 1.8rem;
+        color: #2980b9;
+    }
+    .card-body {
+        font-size: 1.1rem;
+        color: #555;
+    }
+    .card-image {
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 1rem;
+        transition: transform 0.3s ease;
+    }
+    .card-image:hover {
+        transform: scale(1.05);
+    }
+
+
+</style>
+
+<div class="container-fluid hero-header" style="background: url('{% static 'img/5.jpeg' %}') center/cover no-repeat;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="hero-header-inner animated zoomIn">
+                    <h1 class="display-1  fw-bold">ABOUT US</h1>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#" class="text-white">Pages</a></li>
+                        <li class="breadcrumb-item text-warning" aria-current="page">About</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Introduction & Mission Statement -->
+    <div class="container">
+        <!-- Introduction & Mission Statement -->
+        <div class="section welcome-section">
+            <div class="side-image wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.3s">
+                <img src="{% static 'img/5.jpeg' %}" alt="St. Thadeous Charity" />
+            </div>
+            <div class="content wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.5s">
+                <h1>Welcome to St. Thadeous Charity</h1>
+                <p>At <strong>St. Thadeous</strong>, we are dedicated to transforming the lives of needy children and orphans by ensuring they receive education, spiritual guidance, and moral upbringing. We believe that every child deserves the opportunity to grow in a supportive and nurturing environment, regardless of their background or circumstances. Our commitment extends beyond just providing for their immediate needs, as we aim to empower them to achieve a brighter future and create lasting positive change in their communities.</p>
+            </div>
+        </div>
+    </div>
+    
+
+<!-- Mission, Vision, and Objectives Cards Section -->
+<div class="vision-mission-container">
+    <h1 class="section-title wow fadeInUp" data-wow-duration="1.5s">Our Vision & Mission</h1>
+    
+    <div class="vision-mission-section">
+        <div class="vision wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.3s">
+            <div class="overlay"></div>  <!-- Dark Overlay -->
+            <div class="conten">
+                <i class="fas fa-eye"></i>  <!-- Vision Icon -->
+                <h2>Vision</h2>
+                <p>To offer quality & affordable personal & home care products both locally & internationally through innovation, efficient production & use of proficient commercial systems.</p>
+            </div>
+        </div>
+        
+        <div class="mission wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.5s">
+            <div class="conten">
+                <i class="fas fa-bullseye"></i>  <!-- Mission Icon -->
+                <h2>Mission</h2>
+                <p>To become a globally revered manufacturer of quality personal & homecare products while creating values for customers, employees, stakeholders & communities.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="objectives-section">
+    <h2 class="section-title wow fadeInUp" data-wow-duration="1.5s">Our Objectives</h2>
+    <p class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">We aim to create a lasting impact through these key objectives.</p>
+
+    <div class="objectives-container">
+        <div class="objective-card wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.3s">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3>Support Needy Children</h3>
+            <p>Providing school requirements and fees to needy children.</p>
+        </div>
+
+        <div class="objective-card wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
+            <i class="fas fa-church"></i>
+            <h3>Spiritual & Moral Grooming</h3>
+            <p>Helping children grow into responsible citizens through seminars and get-togethers.</p>
+        </div>
+
+        <div class="objective-card wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.7s">
+            <i class="fas fa-money-bill-wave"></i>
+            <h3>Income Strategy</h3>
+            <p>Establishing sustainable income sources for the project.</p>
+        </div>
+
+        <div class="objective-card wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.9s">
+            <i class="fas fa-home"></i>
+            <h3>Permanent Home</h3>
+            <p>Acquiring a permanent place to establish a children's home.</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="strategies-section">
+    <h2 class="section-title wow fadeInUp" data-wow-duration="1.5s">Future Strategies</h2>
+    <p class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">Our plans to ensure long-term sustainability and impact.</p>
+
+    <div class="strategies-container">
+        <div class="strategy-card wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.5s">
+            <i class="fas fa-chart-line"></i>
+            <h3>Income-Generating Projects</h3>
+            <p>Setting up projects that will provide a continuous source of funding for the organization.</p>
+        </div>
+
+        <div class="strategy-card wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.7s">
+            <i class="fas fa-hand-holding-usd"></i>
+            <h3>Fundraising Events & Campaigns</h3>
+            <p>Organizing events and campaigns to raise funds and support for our initiatives.</p>
+        </div>
+    </div>
+</div>
+
+
+  <!-- Founder Message -->
+  <div class="section founder-message">
+    <div class="founder-image wow fadeInLeft" data-wow-duration="1.5s">
+        <img src="{% static 'img/1.jpeg' %}" alt="Founder Image">
+    </div>
+    <div class="founder-content wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.3s">
+        <h2>A Message from Our Founder, Rev. Fr. Jude</h2>
+        <p>As the founder of St. Thadeous, I began this journey with a deep passion to make a real difference in the lives of orphaned and underprivileged children. Witnessing their struggles firsthand has fueled my mission to provide them with access to education, spiritual enrichment, and the tools to become responsible and successful members of society.</p>
+        <p>Through this charity, we aim to offer not just education, but a holistic development that builds both spiritual and moral strength. Every child deserves the opportunity to succeed, and it is our calling to help them realize their full potential.</p>
+        <p>I invite you to join us in this noble cause and help us create a brighter, more hopeful future for children in need. Together, we can make an enduring impact and change lives for the better.</p>
+        <p><strong>Rev. Fr. Jude</strong></p>
+    </div>
+</div>
+
+
+    <!-- History & Background -->
+    <div class="section history-background">
+        <h2>History & Background</h2>
+        <p>St. Jude Children's Fund was founded in 2017 by <strong>Rev. Fr. Thaddaeus Kyekulidfe Mubiru</strong>. It started with the vision of helping needy children who cannot afford basic school requirements such as books, pens, uniforms, and school fees.</p>
+        <p>Rev. Fr. Jude's inspiration came when his mother passed away while he was in primary one, following the passing of his father when he was just two years old. He received help from the elders of his village who solicited books, pens, pencils, and school fees for him, enabling him to continue his education.</p>
+        <p>From that experience, Rev. Fr. Jude set a goal to create avenues for assisting and helping needy and orphaned children to ensure they receive an education.</p>
+        <p>The fund takes on and supports children from various denominations, from primary to secondary school.</p>
+    </div>
+    
+
+<!-- Programs & Initiatives Section -->
+
+<div class="section programs-initiatives">
+    <h2 class="wow fadeInUp" data-wow-duration="1.5s">Programs & Initiatives</h2>
+    <div class="programs-container">
+        <div class="program-card wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">
+            <div class="card-header">
+                <i class="fas fa-school"></i>
+                <h3>School Fees & Supplies</h3>
+            </div>
+            <div class="card-body">
+                <p>We support children with school fees, books, and uniforms, ensuring that education remains accessible to all, regardless of their background.</p>
+                <img src="{% static 'img/schsupp.jpg' %}" alt="School Supplies" class="card-image">
+            </div>
+        </div>
+        <div class="program-card wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.4s">
+            <div class="card-header">
+                <i class="fas fa-users"></i>
+                <h3>Holiday Seminars & Get-Togethers</h3>
+            </div>
+            <div class="card-body">
+                <p>We organize spiritual and moral development activities, creating opportunities for the children to grow in faith, character, and community.</p>
+                <img src="{% static 'img/5.jpeg' %}" alt="Holiday Seminar" class="card-image">
+            </div>
+        </div>
+        <div class="program-card wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.6s">
+            <div class="card-header">
+                <i class="fas fa-bible"></i>
+                <h3>Spiritual & Moral Grooming</h3>
+            </div>
+            <div class="card-body">
+                <p>Our programs instill strong spiritual values and moral principles, shaping children into responsible members of society who lead by example.</p>
+                <img src="{% static 'img/grooming.jpeg' %}" alt="Spiritual Grooming" class="card-image">
+            </div>
+        </div>
+        <div class="program-card wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.8s">
+            <div class="card-header">
+                <i class="fas fa-people-arrows"></i>
+                <h3>Mentorship & Counseling</h3>
+            </div>
+            <div class="card-body">
+                <p>We provide mentorship and counseling to guide children on their personal and academic journeys, helping them overcome challenges and build resilience.</p>
+                <img src="{% static 'img/mentoring.jpg' %}" alt="Mentorship & Counseling" class="card-image">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Team Start -->
+<div class="container-fluid team py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 700px;">
+            <p class="fs-5 text-uppercase text-primary">Our Team</p>
+            <h1 class="display-3 fw-bold text-dark">Meet Our Organizers</h1>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-4 col-xl-5">
+                <div class="team-img wow zoomIn" data-wow-delay="0.1s">
+                    <img src="{% static 'img/1.jpeg' %}" class="img-fluid rounded-circle shadow-lg team-img-hover" alt="">
+                </div>
+            </div>
+            <div class="col-lg-8 col-xl-7">
+                <div class="team-item wow fadeIn" data-wow-delay="0.1s">
+                    <h1 class="text-dark fw-bold team-item-title">Rev. Fr. Jude</h1>
+                    <h5 class="fw-normal fst-italic text-primary mb-4">Director</h5>
+                    <p class="mb-4 text-muted">
+                        Rev. Fr. Jude is dedicated to guiding the mission of St. Thadeous Charity with a heart full of compassion and commitment. His leadership ensures the success of our programs, empowering individuals and communities to live by faith and serve others. Through his direction, we strive to make a meaningful impact, grounded in love and service.
+                    </p>
+                    <div class="team-icon d-flex pb-4 mb-4 border-bottom border-primary">
+                        <a class="btn btn-primary btn-lg-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-primary btn-lg-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-primary btn-lg-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-primary btn-lg-square social-btn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="team-item wow zoomIn" data-wow-delay="0.2s">
+                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <div class="team-content text-dark text-center py-3">
+                                <div class="team-content-inner">
+                                    <h5 class="mb-0 team-item-title">Mary Williams</h5>
+                                    <p class="text-dark">Vice President</p>
+                                    <!-- <p class="text-muted">Mary organizes impactful charity events and connects the community through various initiatives. Her passion for outreach and serving others is what drives our organization's mission forward.</p> -->
+                                    <div class="team-icon d-flex align-items-center justify-content-center">
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-item wow zoomIn" data-wow-delay="0.4s">
+                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <div class="team-content text-dark text-center py-3">
+                                <div class="team-content-inner">
+                                    <h5 class="mb-0 team-item-title">David Clark</h5>
+                                    <p class="text-dark">Outreach Coordinator</p>
+                                    <!-- <p class="text-muted">David ensures that our outreach programs reach those in need. His commitment to creating positive change within our community is unwavering, and he works tirelessly to bring people together.</p> -->
+                                    <div class="team-icon d-flex align-items-center justify-content-center">
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-item wow zoomIn" data-wow-delay="0.6s">
+                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <div class="team-content text-dark text-center py-3">
+                                <div class="team-content-inner">
+                                    <h5 class="mb-0 team-item-title">Sophia Turner</h5>
+                                    <p class="text-dark">Volunteer Coordinator</p>
+                                    <!-- <p class="text-muted">Sophia works closely with volunteers to ensure they are well-prepared and supported in their roles. Her nurturing approach ensures a smooth experience for everyone who contributes to our programs.</p> -->
+                                    <div class="team-icon d-flex align-items-center justify-content-center">
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Team End -->
+
+{% endblock %}
+
