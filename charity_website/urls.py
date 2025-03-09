@@ -21,7 +21,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('charityapp.urls')), 
+    path('', include('charityapp.urls')),
+    path("payments/", include("django_pesapalv3.urls")), 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

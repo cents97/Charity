@@ -93,3 +93,15 @@ class PartnershipApplication(models.Model):
 
     def __str__(self):
         return self.name
+
+# models.py
+from django.db import models
+
+class Donation(models.Model):
+    order_tracking_id = models.CharField(max_length=100)
+    payment_status = models.CharField(max_length=50, default="PENDING")
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    donor_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"Donation by {self.donor_name} (Status: {self.payment_status})"

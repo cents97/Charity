@@ -101,6 +101,12 @@
         display: block;
         margin-top: 10px;
     }
+
+    .alert {
+        margin-top: 20px;
+        text-align: center;
+    }
+
 </style>
 
 <!-- Hero Header -->
@@ -120,76 +126,32 @@
         </div>
     </div>
 </div>
-
 <div class="container mt-5">
     <h2 class="text-center">Make a Donation</h2>
 
+    <!-- Display alert if there is an error -->
+    {% if error_message %}
+    <script>
+        // Only show the alert if there's an error after form submission
+        alert("Payment failed: {{ error_message }}");
+    </script>
+    {% endif %}
+
     <form method="POST" action="{% url 'process_payment' %}">
         {% csrf_token %}
-
-        <!-- Full Name -->
-        <div class="mb-3">
-            <label for="name" class="form-label fw-bold">Full Name</label>
-            <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
-        </div>
-
-        <!-- Email -->
-        <div class="mb-3">
-            <label for="email" class="form-label fw-bold">Email Address</label>
-            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
-        </div>
-
-        <!-- Phone Number -->
-        <div class="mb-3">
-            <label for="phone_number" class="form-label fw-bold">Phone Number</label>
-            <input type="tel" name="phone_number" id="phone_number" class="form-control"
-                   placeholder="e.g. 2567XXXXXXXX (without +)" required
-                   pattern="2567\d{8}" title="Enter a valid Ugandan number in the format 2567XXXXXXXX">
-            <small class="text-muted">Use international format: 2567XXXXXXXX (without +).</small>
-        </div>
-
-        <!-- Donation Amount -->
-        <div class="mb-3">
-            <label for="amount" class="form-label fw-bold">Enter Donation Amount</label>
-            <div class="input-group">
-                <span class="input-group-text bg-light fw-bold">UGX</span>
-                <input type="number" name="amount" class="form-control" min="1" required>
-            </div>
-        </div>
-
-        <!-- Payment Method -->
-        <div class="mb-3">
-            <label for="payment_method" class="form-label fw-bold">Select Payment Method</label>
-            <select name="payment_method" class="form-select">
-                <option value="card">Credit/Debit Card</option>
-                <option value="mobilemoney">Mobile Money</option>
-                <option value="bank">Bank Transfer</option>
-            </select>
-        </div>
-
-        <!-- Donate Button -->
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary w-100 fw-bold">
-                <i class="fas fa-heart me-2"></i> Donate Now
-            </button>
-        </div>
+        
+        <label for="amount">Amount</label>
+        <input type="number" name="amount" id="amount" required>
+        
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+        
+        <button type="submit">Donate</button>
     </form>
 </div>
 
-<!-- JavaScript Validation -->
-<script>
-    document.getElementById("phone_number").addEventListener("input", function () {
-        let phoneField = this;
-        let phoneNumber = phoneField.value;
-        let regex = /^2567\d{8}$/; // Ensures format 2567XXXXXXXX
-        
-        if (!regex.test(phoneNumber)) {
-            phoneField.setCustomValidity("Enter a valid Ugandan phone number in the format 2567XXXXXXXX.");
-        } else {
-            phoneField.setCustomValidity(""); // Valid input
-        }
-    });
-</script>
+
+
 
 
 {% endblock %}

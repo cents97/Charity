@@ -1,6 +1,4 @@
 from django.shortcuts import render
-import requests
-import re
 from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -9,6 +7,14 @@ from .models import ContactMessage
 from .models import HelpingHand,CharityEvent,BlogPost,Testimonial, CharityGallery
 from .forms import VolunteerForm, PartnershipApplicationForm
 from django.contrib import messages
+from datetime import datetime
+from dateutil.parser import parse
+from django.utils import timezone  # Import timezone for handling timezones
+import logging
+import requests
+from django.core.cache import cache
+
+
 
 def home(request):
     hands = HelpingHand.objects.all()  # Get all HelpingHand objects
@@ -37,8 +43,6 @@ def programs(request):
 def get_involved(request):
     return render(request, 'get_involved.html')
 
-def donate(request):
-    return render(request, 'donate.html')
 
 def events(request):
     events = CharityEvent.objects.order_by('date')  # Fetch events sorted by date
@@ -135,51 +139,98 @@ def partnership(request):
 
     return render(request, "charity/partnership.html", {"form": form})
 
-def process_payment(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        phone_number = request.POST.get("phone_number")
-        amount = request.POST.get("amount")
-        payment_method = request.POST.get("payment_method")
 
-        # Validate phone number format (should be in 2567XXXXXXXX format)
-        if not re.match(r"^2567\d{8}$", phone_number):
-            return JsonResponse({"error": "Invalid phone number format. Use 2567XXXXXXXX."}, status=400)
 
-        # Flutterwave API URL
-        url = "https://api.flutterwave.com/v3/payments"
-        
-        headers = {
-            "Authorization": f"Bearer {settings.FLUTTERWAVE_SECRET_KEY}",
-            "Content-Type": "application/json",
-        }
-        
-        data = {
-            "tx_ref": "donation_" + str(amount),  # Unique transaction ID
-            "amount": amount,
-            "currency": "UGX",
-            "payment_options": payment_method,
-            "redirect_url": "https://yourwebsite.com/payment-success",
-            "customer": {
-                "email": email,
-                "name": name,
-                "phone_number": phone_number,
-            },
-            "customizations": {
-                "title": "St. Thadeous Charity Donation",
-                "description": "Thank you for your support!",
-            },
-        }
+# Set up logger
+logger = logging.getLogger(__name__)
 
-        # Send request to Flutterwave
-        response = requests.post(url, json=data, headers=headers)
-        res_data = response.json()
+# =========================== GET ACCESS TOKEN =========================== #
+def get_access_token():
+    """Fetches and caches the Pesapal access token"""
+    # Try to get the token from cache first
+    token = cache.get("pesapal_access_token")
 
-        # Redirect user to payment link
-        if res_data["status"] == "success":
-            return redirect(res_data["data"]["link"])
+    # If token exists in cache, return it
+    if token:
+        return token
+
+    # URL to get the access token
+    url = "https://cybqa.pesapal.com/pesapalv3/api/Auth/RequestToken"
+
+    # Set the headers for the request
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    # The request body with your Pesapal credentials
+    data = {
+        "consumer_key": settings.PESAPAL_CONSUMER_KEY,
+        "consumer_secret": settings.PESAPAL_CONSUMER_SECRET
+    }
+
+    try:
+        # Send the POST request to get the token
+        response = requests.post(url, headers=headers, json=data)
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Parse the response JSON
+            token_data = response.json()
+
+            # Get the token and expiry date
+            new_token = token_data.get("token")
+            expiry_date = token_data.get("expiryDate")
+
+            if new_token:
+                # If token is present, cache it with expiry time
+                # Calculate expiration time based on expiryDate (use the expiryDate in UTC)
+                cache.set("pesapal_access_token", new_token, timeout=calculate_timeout(expiry_date))
+
+                return new_token
+            else:
+                logger.error("Pesapal token response missing 'token' key: %s", token_data)
+                return None
         else:
-            return JsonResponse({"error": "Payment Failed"}, status=400)
+            # Log if the request failed
+            logger.error("Failed to get Pesapal access token. Response: %s", response.text)
+            return None
+    except Exception as e:
+        # Log any errors that occurred during the request
+        logger.error("Error occurred while requesting Pesapal token: %s", str(e))
+        return None
 
-    return render(request, "charity/payment.html")
+def calculate_timeout(expiry_date):
+    """Calculate the timeout for the cached token based on expiryDate."""
+    # Parse the expiryDate from the API response
+    expiry_datetime = parse(expiry_date)
+    current_time = datetime.utcnow()
+
+    # Calculate the time difference in seconds
+    time_diff = (expiry_datetime - current_time).total_seconds()
+    return max(time_diff, 0)  # Ensure timeout is not negative
+
+
+def calculate_timeout(expiry_date):
+    """Calculate the timeout for the cached token based on expiryDate."""
+    # Parse the expiryDate from the API response (this will be an aware datetime)
+    expiry_datetime = parse(expiry_date)
+
+    # Get the current time with timezone info
+    current_time = timezone.now()  # Use timezone-aware datetime
+
+    # Calculate the time difference in seconds
+    time_diff = (expiry_datetime - current_time).total_seconds()
+
+    # Ensure timeout is not negative (if the token has expired)
+    return max(time_diff, 0)
+
+
+
+def test_pesapal_token(request):
+    """Test if the Pesapal access token function is working."""
+    token = get_access_token()
+    if token:
+        return JsonResponse({"status": "success", "token": token})
+    else:
+        return JsonResponse({"status": "error", "message": "Failed to retrieve token"})
