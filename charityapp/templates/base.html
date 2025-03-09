@@ -81,7 +81,7 @@
                         <div class="col-lg-7 text-start">
                             <div class="h-100 d-inline-flex align-items-center me-4">
                                 <span class="fa fa-phone-alt me-2 text-dark"></span>
-                                <a href="#" class="text-secondary"><span>+012 345 6789</span></a>
+                                <a href="#" class="text-secondary"><span>077 345 6789</span></a>
                             </div>
                             <div class="h-100 d-inline-flex align-items-center">
                                 <span class="far fa-envelope me-2 text-dark"></span>
@@ -95,7 +95,8 @@
                                 <a class="text-dark px-2" href=""><i class="fab fa-twitter"></i></a>
                                 <a class="text-dark px-2" href=""><i class="fab fa-linkedin-in"></i></a>
                                 <a class="text-dark px-2" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="text-body ps-4" href=""><i class="fa fa-lock text-dark me-1"></i> Signup/login</a>
+                                <a href="{% url 'admin:login' %}?next=/admin/" class="nav-item nav-link" >Admin Login</a>
+
                             </div>
                         </div>
                     </div>

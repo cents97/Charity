@@ -23,8 +23,10 @@ urlpatterns = [
     path('partnership/', views.partnership, name='partnership'),
     path('fundraise/', views.fundraise, name='fundraise'),
     path('gifts/', views.gifts, name='gifts'),   
-    path('test-pesapal-token/', views.test_pesapal_token, name='test_pesapal_token'), 
     
+    path('submit-order/', views.submit_order_request, name='submit_order'),
+    path('pesapal-ipn/', views.pesapal_ipn, name='pesapal_ipn'),
+    path('payment-status/<str:order_tracking_id>/', views.check_payment_status, name='check_payment_status'),
   
     
    

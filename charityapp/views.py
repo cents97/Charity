@@ -227,10 +227,132 @@ def calculate_timeout(expiry_date):
 
 
 
-def test_pesapal_token(request):
-    """Test if the Pesapal access token function is working."""
+import requests
+import json
+import logging
+from django.shortcuts import redirect
+from django.http import JsonResponse
+from django.conf import settings
+from .models import Donation
+
+
+# Logger
+logger = logging.getLogger(__name__)
+
+# Pesapal URLs
+PESAPAL_ORDER_URL = "https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest"
+
+def submit_order_request(request):
+    """ Submits an order request to Pesapal and redirects the user """
+
+    # Get token
     token = get_access_token()
-    if token:
-        return JsonResponse({"status": "success", "token": token})
-    else:
-        return JsonResponse({"status": "error", "message": "Failed to retrieve token"})
+    if not token:
+        return JsonResponse({"error": "Failed to retrieve access token"}, status=400)
+
+    # Simulated Order Details (Replace with actual data)
+    order_data = {
+        "id": "DON123456",  # Unique Order ID
+        "currency": "UGX",
+        "amount": 50000.00,
+        "description": "Donation to Charity",
+        "callback_url": "https://st-thaddeous.onrender.com/payment-response/",
+        "redirect_mode": "TOP_WINDOW",
+        "notification_id": "1443cc38-06f0-474b-847f-dc11ef586fe8",
+        "branch": "Main Branch",
+        "billing_address": {
+            "email_address": "donor@example.com",
+            "phone_number": "256712345678",
+            "country_code": "UG",
+            "first_name": "John",
+            "last_name": "Doe",
+            "city": "Kampala"
+        }
+    }
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+
+    try:
+        response = requests.post(PESAPAL_ORDER_URL, headers=headers, json=order_data)
+        if response.status_code == 200:
+            data = response.json()
+            payment_url = data.get("redirect_url")
+
+            if payment_url:
+                return redirect(payment_url)  # Redirect user to Pesapal payment page
+            else:
+                logger.error("Missing redirect_url: %s", data)
+                return JsonResponse({"error": "Failed to retrieve payment URL"}, status=400)
+        else:
+            logger.error("Pesapal order request failed: %s", response.text)
+            return JsonResponse({"error": "Failed to create order", "details": response.json()}, status=400)
+    except Exception as e:
+        logger.error("Error submitting order request: %s", str(e))
+        return JsonResponse({"error": "Internal server error"}, status=500)
+
+
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.crypto import get_random_string
+from .models import Donation
+
+@csrf_exempt
+def pesapal_ipn(request):
+    """Handles Pesapal IPN updates"""
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            order_tracking_id = data.get("OrderTrackingId")
+            status = data.get("status")
+
+            # Update the donation record
+            donation = Donation.objects.filter(order_tracking_id=order_tracking_id).first()
+            if donation:
+                donation.payment_status = status
+                donation.save()
+                return JsonResponse({"message": "IPN Received"}, status=200)
+            else:
+                return JsonResponse({"error": "Donation not found"}, status=404)
+        except Exception as e:
+            logger.error("Error processing IPN: %s", str(e))
+            return JsonResponse({"error": "Invalid data"}, status=400)
+
+    return JsonResponse({"error": "Invalid request"}, status=405)
+
+PESAPAL_TRANSACTION_STATUS_URL = "https://cybqa.pesapal.com/pesapalv3/api/Transactions/GetTransactionStatus"
+
+def check_payment_status(request, order_tracking_id):
+    """Checks payment status via Pesapal API"""
+    
+    token = get_access_token()
+    if not token:
+        return JsonResponse({"error": "Failed to retrieve access token"}, status=400)
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+
+    try:
+        response = requests.get(f"{PESAPAL_TRANSACTION_STATUS_URL}?orderTrackingId={order_tracking_id}", headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+            status = data.get("status")
+
+            # Update donation status
+            donation = Donation.objects.filter(order_tracking_id=order_tracking_id).first()
+            if donation:
+                donation.payment_status = status
+                donation.save()
+                return JsonResponse({"status": status})
+            else:
+                return JsonResponse({"error": "Donation not found"}, status=404)
+        else:
+            return JsonResponse({"error": "Failed to fetch status"}, status=response.status_code)
+    except Exception as e:
+        logger.error("Error fetching transaction status: %s", str(e))
+        return JsonResponse({"error": "Internal server error"}, status=500)
