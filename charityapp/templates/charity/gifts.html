@@ -2,60 +2,6 @@
 {% load static %}
 
 {% block content %}
-
-<div class="container-fluid hero-header" style="background: url('{% static 'img/5.jpeg' %}') center/cover no-repeat;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7">
-                <div class="hero-header-inner animated zoomIn">
-                    <h1 class="display-1  fw-bold">Educational Support</h1>
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#" class="text-white">Programs</a></li>
-                        <li class="breadcrumb-item text-warning" aria-current="page">Education</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Section 1: Headline & Introduction -->
-<section class="gifts-intro">
-    <div class="container">
-        <h2>Your Gift Can Change Lives!</h2>
-        <p>
-            Your generous gift, whether financial or a physical donation, has the power to transform lives. 
-            With your contribution, children can stay in school, families can access life-saving medical care, 
-            and communities can receive the support they need to thrive. Your gift is more than just a donation; 
-            it is a symbol of hope, compassion, and a brighter future for those in need.
-        </p>
-    </div>
-</section>
-
-<!-- Section 2: How Gifts Make a Difference -->
-<section class="gifts-difference">
-    <div class="container">
-        <h3>How Gifts Make a Difference</h3>
-        <p>
-            Gifts provide direct support where it is most needed. When you donate, you’re helping in tangible ways:
-        </p>
-        <ul>
-            <li><strong>School Supplies & Education</strong>: Donating books, school uniforms, or stationery ensures that a child has the tools they need to succeed in school and achieve their dreams.</li>
-            <li><strong>Medical Assistance</strong>: Contributions of medicines, medical supplies, or financial aid for medical care can save lives and ensure that individuals can access the treatment they desperately need.</li>
-            <li><strong>Food & Nourishment</strong>: Food donations provide nourishment for families who are struggling to meet their basic needs, allowing children to grow healthy and parents to focus on improving their lives.</li>
-        </ul>
-        <p>
-            <strong>The Emotional Impact:</strong> By giving, you are not just providing material items; you’re offering hope. 
-            You’re becoming part of a community of change-makers who are working together to create a ripple effect of kindness and support. 
-            Your generosity brings smiles, restores health, and opens doors of opportunity.
-        </p>
-        <p>
-            Together, we are making a world of difference—one gift at a time.
-        </p>
-    </div>
-</section>
-
 <style>
     .gifts-intro {
         background: #f8f9fa;
@@ -226,6 +172,61 @@
     
 </style>
 
+<div class="container-fluid hero-header" style="background: url('{% static 'img/5.jpeg' %}') center/cover no-repeat;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="hero-header-inner animated zoomIn">
+                    <h1 class="display-1  fw-bold">Gifts</h1>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#" class="text-white">Programs</a></li>
+                        <li class="breadcrumb-item text-warning" aria-current="page">Gifts</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 1: Headline & Introduction -->
+<section class="gifts-intro">
+    <div class="container">
+        <h2>Your Gift Can Change Lives!</h2>
+        <p>
+            Your generous gift, whether financial or a physical donation, has the power to transform lives. 
+            With your contribution, children can stay in school, families can access life-saving medical care, 
+            and communities can receive the support they need to thrive. Your gift is more than just a donation; 
+            it is a symbol of hope, compassion, and a brighter future for those in need.
+        </p>
+    </div>
+</section>
+
+<!-- Section 2: How Gifts Make a Difference -->
+<section class="gifts-difference">
+    <div class="container">
+        <h3>How Gifts Make a Difference</h3>
+        <p>
+            Gifts provide direct support where it is most needed. When you donate, you’re helping in tangible ways:
+        </p>
+        <ul>
+            <li><strong>School Supplies & Education</strong>: Donating books, school uniforms, or stationery ensures that a child has the tools they need to succeed in school and achieve their dreams.</li>
+            <li><strong>Medical Assistance</strong>: Contributions of medicines, medical supplies, or financial aid for medical care can save lives and ensure that individuals can access the treatment they desperately need.</li>
+            <li><strong>Food & Nourishment</strong>: Food donations provide nourishment for families who are struggling to meet their basic needs, allowing children to grow healthy and parents to focus on improving their lives.</li>
+        </ul>
+        <p>
+            <strong>The Emotional Impact:</strong> By giving, you are not just providing material items; you’re offering hope. 
+            You’re becoming part of a community of change-makers who are working together to create a ripple effect of kindness and support. 
+            Your generosity brings smiles, restores health, and opens doors of opportunity.
+        </p>
+        <p>
+            Together, we are making a world of difference—one gift at a time.
+        </p>
+    </div>
+</section>
+
+
+
 <!-- Section 3: Gift Options -->
 <section class="gift-options" style="background-color: #f9f9f9; padding: 40px 0;">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
@@ -265,19 +266,19 @@
             <p style="font-size: 18px; color: #7f8c8d;">Explore our catalog of items you can donate to make an impact. Each item directly helps those in need.</p>
             <div class="catalog-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
                 <div class="catalog-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <img src="school-supplies.jpg" alt="School Supplies" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                    <img src="{% static 'img/schsupp.jpg' %}" alt="School Supplies" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
                     <h5 style="font-size: 24px; font-weight: bold; color: #2980b9; margin-top: 15px;">School Supplies</h5>
                     <p style="font-size: 16px; color: #7f8c8d;">Essential tools for students to help them stay in school.</p>
                     <p style="font-size: 16px; font-weight: bold; color: #2c3e50;">Impact: Each set of supplies helps a child complete a school year.</p>
                 </div>
                 <div class="catalog-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <img src="medical-supplies.jpg" alt="Medical Supplies" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                    <img src="{% static 'img/medsupplies.png' %}" alt="Medical Supplies" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
                     <h5 style="font-size: 24px; font-weight: bold; color: #2980b9; margin-top: 15px;">Medical Supplies</h5>
                     <p style="font-size: 16px; color: #7f8c8d;">Items to help with urgent care, like bandages, medicine, and first aid kits.</p>
                     <p style="font-size: 16px; font-weight: bold; color: #2c3e50;">Impact: Medical supplies help save lives by providing timely treatments.</p>
                 </div>
                 <div class="catalog-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <img src="toys.jpg" alt="Toys for Children" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                    <img src="{% static 'img/toys.png' %}" alt="Toys for Children" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
                     <h5 style="font-size: 24px; font-weight: bold; color: #2980b9; margin-top: 15px;">Toys for Children</h5>
                     <p style="font-size: 16px; color: #7f8c8d;">Brighten a child's day with safe, educational toys.</p>
                     <p style="font-size: 16px; font-weight: bold; color: #2c3e50;">Impact: A toy can bring joy and stability to a child's life, offering emotional support.</p>

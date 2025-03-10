@@ -428,6 +428,21 @@
         padding-right: 20px;
     }
 }
+.event-item img {
+    height: 250px; /* Adjust this value as needed */
+    object-fit: cover; /* Ensures the image fills the space without distortion */
+    width: 100%; /* Makes sure it remains responsive */
+}
+
+
+
+    .team-item img {
+    height: 300px;  /* Set the height for the images */
+    object-fit: cover;  /* Ensures the image maintains aspect ratio and fills the area without distortion */
+    width: 100%;  /* Makes the width 100% to fill the available space */
+}
+
+
 
 </style>
 
@@ -475,7 +490,7 @@
                 <p class="fs-5 text-uppercase text-primary" style="font-family: 'Arial', sans-serif; letter-spacing: 1px;">About Our Charity</p>
                 <h1 class="display-5 pb-4 m-0" style="font-family: 'Roboto', sans-serif; font-weight: 700; color: #2c3e50;">Together, We Can Make a Difference</h1>
                 <p class="pb-4" style="font-size: 1.2rem; color: #34495e;">
-                    St. Jude Children's Fund was founded in 2017 by Rev. Thaddaeus Kyekulidfe Mubiru with the mission of supporting 
+                    ST.THADDAEUS CHILDREN FOUNDATION LIMITED was founded in 2017 by Rev. Thaddaeus Kyekulidde Mubiru with the mission of supporting 
                     underprivileged children by providing education, spiritual growth, and moral guidance.
                 </p>
                 <a href="{% url 'about' %}" class="btn btn-primary py-3 px-5" style="border-radius: 30px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Read More</a>
@@ -581,9 +596,9 @@
                         <i class="fa fa-home"></i>
                     </div>
                     <h2 class="impact-number" style="font-size: 4rem; font-weight: 700; color: #333;">
-                        <span class="count" data-target="250">0</span>+
+                        <span class="count" data-target="150">0</span>+
                     </h2>
-                    <p class="impact-text" style="color: #555;">Homes Built</p>
+                    <p class="impact-text" style="color: #555;">Homes visted</p>
                     <div class="impact-decoration" style="position: absolute; bottom: -10px; left: 0; width: 100%; height: 20px; background: #3498db; border-radius: 50% 50% 0 0;"></div>
                 </div>
             </div>
@@ -595,7 +610,7 @@
                         <i class="fa fa-users"></i>
                     </div>
                     <h2 class="impact-number" style="font-size: 4rem; font-weight: 700; color: #333;">
-                        <span class="count" data-target="2000">0</span>+
+                        <span class="count" data-target="100">0</span>+
                     </h2>
                     <p class="impact-text" style="color: #555;">Volunteers Engaged</p>
                     <div class="impact-decoration" style="position: absolute; bottom: -10px; left: 0; width: 100%; height: 20px; background: #e74c3c; border-radius: 50% 50% 0 0;"></div>
@@ -817,22 +832,25 @@
                     <p class="mb-4 text-muted">
                         Rev. Fr. Jude is dedicated to guiding the mission of St. Thadeous Charity with a heart full of compassion and commitment. His leadership ensures the success of our programs, empowering individuals and communities to live by faith and serve others. Through his direction, we strive to make a meaningful impact, grounded in love and service.
                     </p>
+                    <p>0779699852/0700568437</p>
                     <div class="team-icon d-flex pb-4 mb-4 border-bottom border-primary">
                         <a class="btn btn-primary btn-lg-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-primary btn-lg-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
                         <a href="#" class="btn btn-primary btn-lg-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="btn btn-primary btn-lg-square social-btn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
+                    
                 </div>
                 
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="team-item wow zoomIn" data-wow-delay="0.2s">
-                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <img src="{% static 'img/na.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
                             <div class="team-content text-dark text-center py-3">
                                 <div class="team-content-inner">
-                                    <h5 class="mb-0 team-item-title">Mary Williams</h5>
-                                    <p class="text-dark">Vice President</p>
+                                    <h5 class="mb-0 team-item-title">Rev Fr Andrew Nanseera</h5>
+                                    <p class="text-dark">Assistant Director </p>
+                                    <p>0788748317</p>
                                     <!-- <p class="text-muted">Mary organizes impactful charity events and connects the community through various initiatives. Her passion for outreach and serving others is what drives our organization's mission forward.</p> -->
                                     <div class="team-icon d-flex align-items-center justify-content-center">
                                         <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
@@ -840,18 +858,40 @@
                                         <a href="#" class="btn btn-primary btn-sm-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
                                         <a href="#" class="btn btn-primary btn-sm-square social-btn"><i class="fab fa-linkedin-in"></i></a>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="team-item wow zoomIn" data-wow-delay="0.4s">
-                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <img src="{% static 'img/rach.jpg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
                             <div class="team-content text-dark text-center py-3">
                                 <div class="team-content-inner">
-                                    <h5 class="mb-0 team-item-title">David Clark</h5>
-                                    <p class="text-dark">Outreach Coordinator</p>
+                                    <h5 class="mb-0 team-item-title">Nanyanzi Racheal </h5>
+                                    <p class="text-dark">Coordinator/Treasurer</p>
+                                    <p>0776466752 / 0701245855</p>
                                     <!-- <p class="text-muted">David ensures that our outreach programs reach those in need. His commitment to creating positive change within our community is unwavering, and he works tirelessly to bring people together.</p> -->
+                                    <div class="team-icon d-flex align-items-center justify-content-center">
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-item wow zoomIn" data-wow-delay="0.6s">
+                            <img src="{% static 'img/sec.jpg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <div class="team-content text-dark text-center py-3">
+                                <div class="team-content-inner">
+                                    <h5 class="mb-0 team-item-title">Ntale Paul</h5>
+                                    <p class="text-dark">secretary</p>
+                                    <p>0778932255 / 0755438688</p>
+                                    <!-- <p class="text-muted">Sophia works closely with volunteers to ensure they are well-prepared and supported in their roles. Her nurturing approach ensures a smooth experience for everyone who contributes to our programs.</p> -->
                                     <div class="team-icon d-flex align-items-center justify-content-center">
                                         <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
                                         <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
@@ -864,12 +904,33 @@
                     </div>
                     <div class="col-md-4">
                         <div class="team-item wow zoomIn" data-wow-delay="0.6s">
-                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <img src="{% static 'img/sa.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
                             <div class="team-content text-dark text-center py-3">
                                 <div class="team-content-inner">
-                                    <h5 class="mb-0 team-item-title">Sophia Turner</h5>
-                                    <p class="text-dark">Volunteer Coordinator</p>
-                                    <!-- <p class="text-muted">Sophia works closely with volunteers to ensure they are well-prepared and supported in their roles. Her nurturing approach ensures a smooth experience for everyone who contributes to our programs.</p> -->
+                                    <h5 class="mb-0 team-item-title">Mukasa Joseph Kasirye </h5>
+                                    <p class="text-dark">Transport officer</p>
+
+                                    <p>0780263323 / 0756409006</p>
+                                    
+                                    <div class="team-icon d-flex align-items-center justify-content-center">
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-item wow zoomIn" data-wow-delay="0.6s">
+                            <img src="{% static 'img/s.jpg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <div class="team-content text-dark text-center py-3">
+                                <div class="team-content-inner">
+                                    <h5 class="mb-0 team-item-title">Ssalongo Joachim Kalema </h5>
+                                    <p class="text-dark">Chairman</p>
+                                    <p>0784348696</p>
+                                    
                                     <div class="team-icon d-flex align-items-center justify-content-center">
                                         <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
                                         <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>

@@ -153,4 +153,12 @@ CACHES = {
     }
 }
 
+JAZZMIN_SETTINGS = {
+   
+    "site_title": "St.Thaddeus Children's Foundation",
+    "site_header": "St.Thaddeus Children's Foundation",
+
+    
+    "site_brand": "St.Thaddeus Children's Foundation",
+}
 

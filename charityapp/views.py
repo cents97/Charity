@@ -13,6 +13,15 @@ from django.utils import timezone  # Import timezone for handling timezones
 import logging
 import requests
 from django.core.cache import cache
+import requests
+import json
+import logging
+from django.shortcuts import redirect
+from django.http import JsonResponse
+from django.conf import settings
+from .models import Donation
+from django.http import HttpResponse, JsonResponse
+
 
 
 
@@ -149,11 +158,17 @@ def get_access_token():
     """Fetches and caches the Pesapal access token"""
     # Try to get the token from cache first
     token = cache.get("pesapal_access_token")
+    expiry_time = cache.get("pesapal_access_token_expiry")
 
-    # If token exists in cache, return it
-    if token:
+    # Check if token exists and is not expired
+    if token and expiry_time and timezone.now() < expiry_time:
         return token
 
+    # If token is expired or not found, fetch a new one
+    return fetch_new_token()
+
+def fetch_new_token():
+    """Fetch a new token from Pesapal and cache it"""
     # URL to get the access token
     url = "https://cybqa.pesapal.com/pesapalv3/api/Auth/RequestToken"
 
@@ -183,9 +198,10 @@ def get_access_token():
             expiry_date = token_data.get("expiryDate")
 
             if new_token:
-                # If token is present, cache it with expiry time
-                # Calculate expiration time based on expiryDate (use the expiryDate in UTC)
+                # Calculate expiration time based on expiryDate
+                expiry_datetime = parse(expiry_date)
                 cache.set("pesapal_access_token", new_token, timeout=calculate_timeout(expiry_date))
+                cache.set("pesapal_access_token_expiry", expiry_datetime, timeout=calculate_timeout(expiry_date))
 
                 return new_token
             else:
@@ -199,17 +215,6 @@ def get_access_token():
         # Log any errors that occurred during the request
         logger.error("Error occurred while requesting Pesapal token: %s", str(e))
         return None
-
-def calculate_timeout(expiry_date):
-    """Calculate the timeout for the cached token based on expiryDate."""
-    # Parse the expiryDate from the API response
-    expiry_datetime = parse(expiry_date)
-    current_time = datetime.utcnow()
-
-    # Calculate the time difference in seconds
-    time_diff = (expiry_datetime - current_time).total_seconds()
-    return max(time_diff, 0)  # Ensure timeout is not negative
-
 
 def calculate_timeout(expiry_date):
     """Calculate the timeout for the cached token based on expiryDate."""
@@ -227,13 +232,8 @@ def calculate_timeout(expiry_date):
 
 
 
-import requests
-import json
-import logging
-from django.shortcuts import redirect
-from django.http import JsonResponse
-from django.conf import settings
-from .models import Donation
+
+
 
 
 # Logger
@@ -356,3 +356,104 @@ def check_payment_status(request, order_tracking_id):
     except Exception as e:
         logger.error("Error fetching transaction status: %s", str(e))
         return JsonResponse({"error": "Internal server error"}, status=500)
+    
+
+import requests
+from django.conf import settings
+from django.utils import timezone
+import logging
+
+# Set up logging
+logger = logging.getLogger(__name__)
+
+# Base URL for Pesapal (use production or sandbox depending on environment)
+BASE_URL = "https://pay.pesapal.com/v3/api/Transactions/GetTransactionStatus"
+
+def get_transaction_status(order_tracking_id):
+    """Get the status of a transaction based on the OrderTrackingId."""
+    # Get the access token
+    token = get_access_token()
+
+    if not token:
+        logger.error("Failed to retrieve access token.")
+        return None
+
+    # Construct the request URL with the OrderTrackingId
+    url = f"{BASE_URL}?orderTrackingId={order_tracking_id}"
+
+    # Set headers for the GET request
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
+
+    try:
+        # Make the GET request to Pesapal to fetch transaction status
+        response = requests.get(url, headers=headers)
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Parse the JSON response
+            transaction_data = response.json()
+
+            # Log the response for debugging
+            logger.info("Pesapal GetTransactionStatus Response: %s", transaction_data)
+
+            # You can now process the payment status and update your system accordingly
+            status_code = transaction_data.get("status_code")
+            payment_status = transaction_data.get("payment_status_description")
+            amount = transaction_data.get("amount")
+            payment_method = transaction_data.get("payment_method")
+            currency = transaction_data.get("currency")
+            confirmation_code = transaction_data.get("confirmation_code")
+            payment_account = transaction_data.get("payment_account")
+
+            # Example of handling different payment statuses
+            if status_code == 1:  # COMPLETED
+                logger.info("Payment completed successfully.")
+                # Store transaction details in your system as needed
+            elif status_code == 2:  # FAILED
+                logger.error("Payment failed: %s", payment_status)
+            elif status_code == 3:  # REVERSED
+                logger.warning("Payment was reversed.")
+            else:  # INVALID
+                logger.error("Invalid payment status: %s", payment_status)
+
+            # Return the transaction details or payment status
+            return transaction_data
+
+        else:
+            logger.error("Failed to get transaction status. Response: %s", response.text)
+            return None
+
+    except requests.exceptions.RequestException as e:
+        logger.error("Error occurred while fetching transaction status: %s", str(e))
+        return None
+
+def handle_callback(request):
+    """Handle the callback from Pesapal after the customer makes a payment."""
+    order_tracking_id = request.GET.get('OrderTrackingId')
+
+    if order_tracking_id:
+        transaction_status = get_transaction_status(order_tracking_id)
+        if transaction_status:
+            # Process the payment status (e.g., update order, send confirmation, etc.)
+            # Return a response based on the status
+            return HttpResponse(f"Transaction status: {transaction_status.get('payment_status_description')}")
+        else:
+            return HttpResponse("Error fetching transaction status.", status=500)
+    else:
+        return HttpResponse("OrderTrackingId is missing.", status=400)
+
+
+def ipn_response(order_tracking_id, merchant_reference):
+    """Respond to Pesapal IPN to confirm receipt of the payment notification."""
+    ipn_response_data = {
+        "orderNotificationType": "IPNCHANGE",
+        "orderTrackingId": order_tracking_id,
+        "orderMerchantReference": merchant_reference,
+        "status": 200  # 200 means the request was successfully received
+    }
+    
+    return JsonResponse(ipn_response_data)

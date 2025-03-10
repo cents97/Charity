@@ -254,11 +254,11 @@
         <div class="row">
             <div class="col-lg-7">
                 <div class="hero-header-inner animated zoomIn">
-                    <h1 class="display-1  fw-bold">Educational Support</h1>
+                    <h1 class="display-1  fw-bold">Fundraising</h1>
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white">Home</a></li>
                         <li class="breadcrumb-item"><a href="#" class="text-white">Programs</a></li>
-                        <li class="breadcrumb-item text-warning" aria-current="page">Education</li>
+                        <li class="breadcrumb-item text-warning" aria-current="page">Fundraising</li>
                     </ol>
                 </div>
             </div>
@@ -368,7 +368,7 @@
             <!-- Education Support Card -->
             <div class="col-md-6 col-lg-3">
                 <div class="card fundraiser-card">
-                    <img src="education.jpg" class="card-img-top" alt="Education Support">
+                    <img src="{% static 'img/education.png' %}" class="card-img-top" alt="Education Support">
                     <div class="card-body">
                         <h5 class="card-title">📚 Education Support</h5>
                         <p class="card-text">
@@ -379,7 +379,7 @@
                             <li>✅ $50 provides school supplies for one child.</li>
                             <li>✅ $100 covers a term's tuition for a student.</li>
                         </ul>
-                        <a href="{% url 'process_payment' %}" class="btn btn-primary">Donate Now</a>
+                        <a href="{% url 'donate' %}" class="btn btn-primary">Donate Now</a>
                     </div>
                 </div>
             </div>
@@ -387,7 +387,7 @@
             <!-- Food Relief Program Card -->
             <div class="col-md-6 col-lg-3">
                 <div class="card fundraiser-card">
-                    <img src="food-relief.jpg" class="card-img-top" alt="Food Relief Program">
+                    <img src="{% static 'img/food-relief.jpg' %}" class="card-img-top" alt="Food Relief Program">
                     <div class="card-body">
                         <h5 class="card-title">🥖 Food Relief Program</h5>
                         <p class="card-text">
@@ -398,7 +398,7 @@
                             <li>✅ $10 provides a family with meals for a week.</li>
                             <li>✅ $50 feeds a child for a month.</li>
                         </ul>
-                        <a href="{% url 'process_payment' %}" class="btn btn-primary">Donate Now</a>
+                        <a href="{% url 'donate' %}" class="btn btn-primary">Donate Now</a>
                     </div>
                 </div>
             </div>
@@ -406,7 +406,7 @@
             <!-- Medical Assistance Fund Card -->
             <div class="col-md-6 col-lg-3">
                 <div class="card fundraiser-card">
-                    <img src="medical.jpg" class="card-img-top" alt="Medical Assistance Fund">
+                    <img src="{% static 'img/medical ass.jpg' %}" class="card-img-top" alt="Medical Assistance Fund">
                     <div class="card-body">
                         <h5 class="card-title">🏥 Medical Assistance Fund</h5>
                         <p class="card-text">
@@ -417,7 +417,7 @@
                             <li>✅ $30 provides essential medication for a sick patient.</li>
                             <li>✅ $100 covers hospital expenses for a struggling family.</li>
                         </ul>
-                        <a href="{% url 'process_payment' %}" class="btn btn-primary">Donate Now</a>
+                        <a href="{% url 'donate' %}" class="btn btn-primary">Donate Now</a>
                     </div>
                 </div>
             </div>
@@ -425,7 +425,7 @@
             <!-- Skills & Empowerment Program Card -->
             <div class="col-md-6 col-lg-3">
                 <div class="card fundraiser-card">
-                    <img src="skills.jpg" class="card-img-top" alt="Skills & Empowerment">
+                    <img src="{% static 'img/empower.webp' %}" class="card-img-top" alt="Skills & Empowerment">
                     <div class="card-body">
                         <h5 class="card-title">🛠 Skills & Empowerment</h5>
                         <p class="card-text">
@@ -436,7 +436,7 @@
                             <li>✅ $20 buys training materials for a student.</li>
                             <li>✅ $200 fully sponsors a youth for a vocational course.</li>
                         </ul>
-                        <a href="{% url 'process_payment' %}" class="btn btn-primary">Donate Now</a>
+                        <a href="{% url 'donate' %}" class="btn btn-primary">Donate Now</a>
                     </div>
                 </div>
             </div>

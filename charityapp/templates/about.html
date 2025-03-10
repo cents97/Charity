@@ -565,6 +565,16 @@
     }
 
 
+    .team-item img {
+    height: 300px;  /* Set the height for the images */
+    object-fit: cover;  /* Ensures the image maintains aspect ratio and fills the area without distortion */
+    width: 100%;  /* Makes the width 100% to fill the available space */
+}
+
+
+
+
+
 </style>
 
 <div class="container-fluid hero-header" style="background: url('{% static 'img/5.jpeg' %}') center/cover no-repeat;">
@@ -683,22 +693,66 @@
         <img src="{% static 'img/1.jpeg' %}" alt="Founder Image">
     </div>
     <div class="founder-content wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.3s">
-        <h2>A Message from Our Founder, Rev. Fr. Jude</h2>
-        <p>As the founder of St. Thadeous, I began this journey with a deep passion to make a real difference in the lives of orphaned and underprivileged children. Witnessing their struggles firsthand has fueled my mission to provide them with access to education, spiritual enrichment, and the tools to become responsible and successful members of society.</p>
+        <h2>A Message from Our Founder, Rev.Fr.Kyekulidde Mubiru Jude</h2>
+        <p>As the founder of ST.THADDAEUS CHILDREN FOUNDATION LIMITED, I began this journey with a deep passion to make a real difference in the lives of orphaned and underprivileged children.
+             I was inspired when my mother passed away while l was in primary one, following the passing of my father when l was just two years old. l received help from the elders of his village who solicited books, pens, pencils, and school fees for me, enabling me to continue my education.
+             Witnessing their struggles firsthand has fueled my mission to provide them with access to education, spiritual enrichment, and the tools to become responsible and successful members of society.</p>
+        
         <p>Through this charity, we aim to offer not just education, but a holistic development that builds both spiritual and moral strength. Every child deserves the opportunity to succeed, and it is our calling to help them realize their full potential.</p>
         <p>I invite you to join us in this noble cause and help us create a brighter, more hopeful future for children in need. Together, we can make an enduring impact and change lives for the better.</p>
-        <p><strong>Rev. Fr. Jude</strong></p>
+        <p><strong>Rev.Fr.Kyekulidde Mubiru Jude</strong></p>
     </div>
 </div>
+
+<div class="section founder-message">
+    <div class="founder-content wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.3s">
+        <h2>A Message from Our Coordinator/Treasurer</h2>
+        <p>As the coordinator and treasurer of ST.THADDAEUS CHILDREN FOUNDATION LIMITED, I am deeply humbled to serve a mission that empowers vulnerable children and orphans through education, spiritual growth, and moral development.
+
+            Our vision is to create transformative opportunities for these young lives, providing them with a solid educational foundation, ethical values, and spiritual guidance.
+            
+             Every program we offer is thoughtfully designed to nurture their minds, hearts, and spirits, empowering them to grow into compassionate, responsible, and well-rounded individuals who positively impact their communities.
+            
+            We are grateful for your partnership in this meaningful journey, and thank you for standing with us as we strive to make a lasting difference in the lives of those we serve.</p>
+        
+        <p><strong>Sincerely,
+            Racheal Nanyanzi </strong></p>
+    </div>
+    <div class="founder-image wow fadeInRight" data-wow-duration="1.5s">
+        <img src="{% static 'img/rach.jpeg' %}" alt="Founder Image">
+    </div>
+</div>
+<style>
+    .founder-message {
+    display: flex;
+    align-items: stretch; /* Ensures both elements take equal height */
+    gap: 20px;
+}
+
+.founder-content, .founder-image {
+    flex: 1; /* Makes both elements take up equal space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content inside */
+}
+
+.founder-image img {
+    width: 100%; /* Ensures the image fits within the div */
+    height: 100%; /* Makes the image match the content height */
+    object-fit: cover; /* Ensures the image fills the space without distortion */
+    border-radius: 10px; /* Optional for rounded corners */
+}
+
+</style>
 
 
     <!-- History & Background -->
     <div class="section history-background">
         <h2>History & Background</h2>
-        <p>St. Jude Children's Fund was founded in 2017 by <strong>Rev. Fr. Thaddaeus Kyekulidfe Mubiru</strong>. It started with the vision of helping needy children who cannot afford basic school requirements such as books, pens, uniforms, and school fees.</p>
+        <p>ST.THADDAEUS CHILDREN FOUNDATION LIMITED was founded in 2017 at St. Charles Lwanga Catholic Church Mutundwe by <strong>Rev. Fr. Thaddaeus Kyekulidde Mubiru</strong>. It started with the vision of helping needy children and seminarians who cannot afford basic school requirements such as books, pens, uniforms, and school fees.</p>
         <p>Rev. Fr. Jude's inspiration came when his mother passed away while he was in primary one, following the passing of his father when he was just two years old. He received help from the elders of his village who solicited books, pens, pencils, and school fees for him, enabling him to continue his education.</p>
         <p>From that experience, Rev. Fr. Jude set a goal to create avenues for assisting and helping needy and orphaned children to ensure they receive an education.</p>
-        <p>The fund takes on and supports children from various denominations, from primary to secondary school.</p>
+        <p>The fund takes on and supports children from various denominations, from primary, secondary schools and universities.</p>
     </div>
     
 
@@ -772,7 +826,7 @@
                     <h1 class="text-dark fw-bold team-item-title">Rev. Fr. Jude</h1>
                     <h5 class="fw-normal fst-italic text-primary mb-4">Director</h5>
                     <p class="mb-4 text-muted">
-                        Rev. Fr. Jude is dedicated to guiding the mission of St. Thadeous Charity with a heart full of compassion and commitment. His leadership ensures the success of our programs, empowering individuals and communities to live by faith and serve others. Through his direction, we strive to make a meaningful impact, grounded in love and service.
+                        Rev. Fr. Jude is dedicated to guiding the mission of ST.THADDAEUS CHILDREN FOUNDATION LIMITED with a heart full of compassion and commitment. His leadership ensures the success of our programs, empowering individuals and communities to live by faith and serve others. Through his direction, we strive to make a meaningful impact, grounded in love and service.
                     </p>
                     <div class="team-icon d-flex pb-4 mb-4 border-bottom border-primary">
                         <a class="btn btn-primary btn-lg-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
@@ -785,11 +839,11 @@
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="team-item wow zoomIn" data-wow-delay="0.2s">
-                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <img src="{% static 'img/na.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
                             <div class="team-content text-dark text-center py-3">
                                 <div class="team-content-inner">
-                                    <h5 class="mb-0 team-item-title">Mary Williams</h5>
-                                    <p class="text-dark">Vice President</p>
+                                    <h5 class="mb-0 team-item-title">Rev Fr Andrew Nanseera</h5>
+                                    <p class="text-dark">Assistant Director </p>
                                     <!-- <p class="text-muted">Mary organizes impactful charity events and connects the community through various initiatives. Her passion for outreach and serving others is what drives our organization's mission forward.</p> -->
                                     <div class="team-icon d-flex align-items-center justify-content-center">
                                         <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
@@ -803,11 +857,11 @@
                     </div>
                     <div class="col-md-4">
                         <div class="team-item wow zoomIn" data-wow-delay="0.4s">
-                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <img src="{% static 'img/rach.jpg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
                             <div class="team-content text-dark text-center py-3">
                                 <div class="team-content-inner">
-                                    <h5 class="mb-0 team-item-title">David Clark</h5>
-                                    <p class="text-dark">Outreach Coordinator</p>
+                                    <h5 class="mb-0 team-item-title">Nanyanzi Racheal </h5>
+                                    <p class="text-dark">Coordinator/Treasurer</p>
                                     <!-- <p class="text-muted">David ensures that our outreach programs reach those in need. His commitment to creating positive change within our community is unwavering, and he works tirelessly to bring people together.</p> -->
                                     <div class="team-icon d-flex align-items-center justify-content-center">
                                         <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
@@ -821,11 +875,47 @@
                     </div>
                     <div class="col-md-4">
                         <div class="team-item wow zoomIn" data-wow-delay="0.6s">
-                            <img src="{% static 'img/2.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <img src="{% static 'img/sec.jpg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
                             <div class="team-content text-dark text-center py-3">
                                 <div class="team-content-inner">
-                                    <h5 class="mb-0 team-item-title">Sophia Turner</h5>
-                                    <p class="text-dark">Volunteer Coordinator</p>
+                                    <h5 class="mb-0 team-item-title">Ntale Paul</h5>
+                                    <p class="text-dark">secretary</p>
+                                    <!-- <p class="text-muted">Sophia works closely with volunteers to ensure they are well-prepared and supported in their roles. Her nurturing approach ensures a smooth experience for everyone who contributes to our programs.</p> -->
+                                    <div class="team-icon d-flex align-items-center justify-content-center">
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-item wow zoomIn" data-wow-delay="0.6s">
+                            <img src="{% static 'img/sa.jpeg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <div class="team-content text-dark text-center py-3">
+                                <div class="team-content-inner">
+                                    <h5 class="mb-0 team-item-title">Mukasa Joseph Kasirye </h5>
+                                    <p class="text-dark">Transport officer</p>
+                                    <!-- <p class="text-muted">Sophia works closely with volunteers to ensure they are well-prepared and supported in their roles. Her nurturing approach ensures a smooth experience for everyone who contributes to our programs.</p> -->
+                                    <div class="team-icon d-flex align-items-center justify-content-center">
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square me-2 social-btn"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm-square social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-item wow zoomIn" data-wow-delay="0.6s">
+                            <img src="{% static 'img/s.jpg' %}" class="img-fluid w-100 rounded-circle shadow-lg team-img-hover" alt="">
+                            <div class="team-content text-dark text-center py-3">
+                                <div class="team-content-inner">
+                                    <h5 class="mb-0 team-item-title">Ssalongo Joachim Kalema </h5>
+                                    <p class="text-dark">Chairman</p>
                                     <!-- <p class="text-muted">Sophia works closely with volunteers to ensure they are well-prepared and supported in their roles. Her nurturing approach ensures a smooth experience for everyone who contributes to our programs.</p> -->
                                     <div class="team-icon d-flex align-items-center justify-content-center">
                                         <a class="btn btn-primary btn-sm-square me-2 social-btn" href=""><i class="fab fa-facebook-f"></i></a>
