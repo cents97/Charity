@@ -27,20 +27,40 @@
     <h2 class="text-center mb-4">📸 Our Charity Gallery</h2>
 
     <div class="row g-3">
-        {% for image in images %}
+        {% for item in media_items %}
+        {% if item.image %}
         <div class="col-md-4 col-sm-6">
-            <a href="{{ image.image.url }}" data-lightbox="gallery" data-title="{{ image.title }}">
+            <a href="{{ item.image.url }}" data-lightbox="gallery" data-title="{{ item.title }}">
                 <div class="gallery-item">
-                    <img src="{{ image.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ image.title }}">
+                    <img src="{{ item.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ item.title }}">
                     <div class="overlay">
-                        <h5 class="text-white text-center">{{ image.title }}</h5>
+                        <h5 class="text-white text-center">{{ item.title }}</h5>
                     </div>
                 </div>
             </a>
         </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <h2 class="text-center mt-5">🎥 Charity Videos</h2>
+    <div class="row g-3">
+        {% for item in media_items %}
+        {% if item.video %}
+        <div class="col-md-6">
+            <div class="video-container">
+                <video controls class="img-fluid rounded shadow-sm">
+                    <source src="{{ item.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h5 class="text-center mt-2">{{ item.title }}</h5>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
+
 
 
 <style>

@@ -51,7 +51,8 @@ class Testimonial(models.Model):
     
 class CharityGallery(models.Model):
     title = models.CharField(max_length=100, blank=True)
-    image = models.ImageField(upload_to='gallery/')
+    image = models.ImageField(upload_to='gallery/',  blank=True, null=True)
+    video = models.FileField(upload_to='gallery/videos/', blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

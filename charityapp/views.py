@@ -58,10 +58,12 @@ def events(request):
     return render(request, 'event.html', {        
         'events': events,        
     })
-    
+
+
 def gallery(request):
-    images = CharityGallery.objects.all()
-    return render(request, 'gallery.html', {'images': images})
+    media_items = CharityGallery.objects.all()
+    return render(request, 'gallery.html', {'media_items': media_items})
+
 
 def contact(request):
     return render(request, 'contact.html')
