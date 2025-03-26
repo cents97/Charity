@@ -283,7 +283,7 @@ def submit_order_request(request):
         "currency": "UGX",
         "amount": float(amount),
         "description": "Donation to Charity",
-        "callback_url": "https://st-thaddeous.onrender.com/payment-response/",
+        "callback_url": "https://st-thaddeous.onrender.com/home/",
         "redirect_mode": "TOP_WINDOW",
         "notification_id": "1443cc38-06f0-474b-847f-dc11ef586fe8",
         "branch": "Main Branch",
