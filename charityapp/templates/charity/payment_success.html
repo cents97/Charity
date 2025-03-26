@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="payment-success">
+        <h1>Payment Successful!</h1>
+        <p>Your payment has been successfully processed.</p>
+        <p><strong>Order Tracking ID:</strong> {{ order_tracking_id }}</p>
+        <p><strong>Order Merchant Reference:</strong> {{ order_merchant_reference }}</p>
+    </div>
+{% endblock %}

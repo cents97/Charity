@@ -22,11 +22,12 @@ urlpatterns = [
     path('volunteer/', views.volunteer_view, name='volunteer'),
     path('partnership/', views.partnership, name='partnership'),
     path('fundraise/', views.fundraise, name='fundraise'),
-    path('gifts/', views.gifts, name='gifts'),   
-    
+    path('gifts/', views.gifts, name='gifts'), 
+    path('order/', views.order, name='order'),      
     path('submit-order/', views.submit_order_request, name='submit_order'),
     path('pesapal-ipn/', views.pesapal_ipn, name='pesapal_ipn'),
     path('payment-status/<str:order_tracking_id>/', views.check_payment_status, name='check_payment_status'),
+    path('payment-response/', views.payment_response, name='payment_response'),
   
     
    

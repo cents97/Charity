@@ -85,6 +85,7 @@ pexpect==4.9.0
 phonenumberslite==8.13.30
 Pillow==10.0.0
 pipenv==2023.6.12
+python-dateutil
 
 
 

@@ -106,6 +106,9 @@ def fundraise(request):
 def gifts(request):
     return render(request, 'charity/gifts.html')
 
+def order(request):
+    return render(request, 'charity/order.html')
+
 def contact(request):
     success_message = None
     if request.method == 'POST':
@@ -233,10 +236,11 @@ def calculate_timeout(expiry_date):
     return max(time_diff, 0)
 
 
-
-
-
-
+import logging
+import uuid
+import requests
+from django.http import JsonResponse
+from django.shortcuts import redirect
 
 # Logger
 logger = logging.getLogger(__name__)
@@ -245,30 +249,57 @@ logger = logging.getLogger(__name__)
 PESAPAL_ORDER_URL = "https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest"
 
 def submit_order_request(request):
-    """ Submits an order request to Pesapal and redirects the user """
+    """ Submits an order request to Pesapal with dynamic user input """
+
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid request method"}, status=400)
 
     # Get token
     token = get_access_token()
     if not token:
         return JsonResponse({"error": "Failed to retrieve access token"}, status=400)
 
-    # Simulated Order Details (Replace with actual data)
+    # Retrieve user input from form
+    first_name = request.POST.get("first_name", "").strip()
+    last_name = request.POST.get("last_name", "").strip()
+    email_address = request.POST.get("email_address", "").strip()
+    phone_number = request.POST.get("phone_number", "").strip()
+    amount = request.POST.get("amount", "").strip()
+    city = request.POST.get("city", "").strip()
+    start_date = request.POST.get("start_date", "").strip()  # Format: dd-MM-yyyy
+    end_date = request.POST.get("end_date", "").strip()      # Format: dd-MM-yyyy
+    frequency = request.POST.get("frequency", "").strip() 
+
+    # Validate required fields
+    if not all([first_name, last_name, email_address, phone_number, amount, city]):
+        return JsonResponse({"error": "All fields are required"}, status=400)
+
+    # Generate unique order ID
+    order_id = f"DON-{uuid.uuid4().hex[:8]}"  # e.g., DON-4a7b8c9d
+
+    # Prepare dynamic order data
     order_data = {
-        "id": "DON123456",  # Unique Order ID
+        "id": order_id,  # Unique Order ID
         "currency": "UGX",
-        "amount": 50000.00,
+        "amount": float(amount),
         "description": "Donation to Charity",
         "callback_url": "https://st-thaddeous.onrender.com/payment-response/",
         "redirect_mode": "TOP_WINDOW",
         "notification_id": "1443cc38-06f0-474b-847f-dc11ef586fe8",
         "branch": "Main Branch",
         "billing_address": {
-            "email_address": "donor@example.com",
-            "phone_number": "256712345678",
+            "email_address": email_address,
+            "phone_number": phone_number,
             "country_code": "UG",
-            "first_name": "John",
-            "last_name": "Doe",
-            "city": "Kampala"
+            "first_name": first_name,
+            "last_name": last_name,
+            "city": city
+        },
+         "account_number": f"{order_id}",  # You can link the account number to the order ID or invoice ID
+        "subscription_details": {
+            "start_date": start_date,
+            "end_date": end_date,
+            "frequency": frequency  # DAILY, WEEKLY, MONTHLY, YEARLY
         }
     }
 
@@ -459,3 +490,103 @@ def ipn_response(order_tracking_id, merchant_reference):
     }
     
     return JsonResponse(ipn_response_data)
+
+
+import logging
+import requests
+from django.http import JsonResponse
+from django.conf import settings
+
+# Set up logging
+logger = logging.getLogger(__name__)
+
+# Pesapal Production URL (use Sandbox in development environment)
+PESAPAL_TRANSACTION_STATUS_URL = "https://pay.pesapal.com/v3/api/Transactions/GetTransactionStatus"
+
+def get_transaction_status(request, order_tracking_id):
+    """
+    Get the status of a transaction based on the orderTrackingId.
+    This endpoint queries the Pesapal API to check the payment status.
+    """
+    # Get the access token (assuming you have a method for this)
+    token = get_access_token()
+    
+    if not token:
+        return JsonResponse({"error": "Failed to retrieve access token"}, status=400)
+
+    # Construct the request URL with the OrderTrackingId
+    url = f"{PESAPAL_TRANSACTION_STATUS_URL}?orderTrackingId={order_tracking_id}"
+
+    # Set headers for the GET request
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
+
+    try:
+        # Make the GET request to Pesapal to fetch transaction status
+        response = requests.get(url, headers=headers)
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            transaction_data = response.json()
+
+            # Process the payment status (e.g., COMPLETED, FAILED)
+            payment_status = transaction_data.get("payment_status_description")
+            status_code = transaction_data.get("status_code")
+            amount = transaction_data.get("amount")
+            payment_method = transaction_data.get("payment_method")
+            currency = transaction_data.get("currency")
+            confirmation_code = transaction_data.get("confirmation_code")
+            payment_account = transaction_data.get("payment_account")
+
+            # Log the transaction details
+            logger.info(f"Payment Status: {payment_status} (Status Code: {status_code})")
+
+            # Return the transaction details
+            return JsonResponse({
+                "payment_status": payment_status,
+                "status_code": status_code,
+                "amount": amount,
+                "payment_method": payment_method,
+                "currency": currency,
+                "confirmation_code": confirmation_code,
+                "payment_account": payment_account
+            })
+        else:
+            # If the request failed, log and return error
+            logger.error(f"Failed to get transaction status. Response: {response.text}")
+            return JsonResponse({"error": "Failed to get transaction status"}, status=400)
+
+    except Exception as e:
+        logger.error(f"Error fetching transaction status: {str(e)}")
+        return JsonResponse({"error": "Internal server error"}, status=500)
+    
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+import logging
+
+# Initialize logger
+logger = logging.getLogger(__name__)
+
+def payment_response(request):
+    """ Handles the response after payment is completed. """
+    order_tracking_id = request.GET.get('OrderTrackingId')
+    order_merchant_reference = request.GET.get('OrderMerchantReference')
+
+    if not order_tracking_id or not order_merchant_reference:
+        logger.error("Missing parameters: OrderTrackingId or OrderMerchantReference")
+        return JsonResponse({"error": "Missing parameters"}, status=400)
+
+    # Example logic to handle the response (check payment status, etc.)
+    # Here you can use the Pesapal API to verify payment, update database, etc.
+    # If successful:
+    return render(request, 'charity/payment_success.html', {
+        'order_tracking_id': order_tracking_id,
+        'order_merchant_reference': order_merchant_reference
+    })
+    
+    # If payment failed, you can return another template or redirect
+    # return render(request, 'payment_failed.html', {...})
+
