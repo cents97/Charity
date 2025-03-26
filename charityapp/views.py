@@ -567,3 +567,27 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import logging
 
+# Initialize logger
+logger = logging.getLogger(__name__)
+
+def payment_response(request):
+    """ Handles the response after payment is completed. """
+    order_tracking_id = request.GET.get('OrderTrackingId')
+    order_merchant_reference = request.GET.get('OrderMerchantReference')
+
+    if not order_tracking_id or not order_merchant_reference:
+        logger.error("Missing parameters: OrderTrackingId or OrderMerchantReference")
+        return JsonResponse({"error": "Missing parameters"}, status=400)
+
+    # Example logic to handle the response (check payment status, etc.)
+    # Here you can use the Pesapal API to verify payment, update database, etc.
+    # If successful:
+    return render(request, 'charity/payment_success.html', {
+        'order_tracking_id': order_tracking_id,
+        'order_merchant_reference': order_merchant_reference
+    })
+    
+    # If payment failed, you can return another template or redirect
+    # return render(request, 'payment_failed.html', {...})
+
+

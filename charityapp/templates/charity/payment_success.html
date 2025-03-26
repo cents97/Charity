@@ -1,6 +1,60 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    /* Payment Success Page Styles */
+.payment-success {
+    background-color: #f0f8ff; /* Light blue background */
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.payment-success h1 {
+    font-size: 2rem;
+    color: #28a745; /* Green color for success */
+    margin-bottom: 20px;
+}
+
+.payment-success p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+.payment-success .order-details {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.payment-success .order-details p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.payment-success .btn-back {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007bff; /* Blue button */
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.payment-success .btn-back:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+</style>
     <div class="payment-success">
         <h1>Payment Successful!</h1>
         <p>Your payment has been successfully processed.</p>
