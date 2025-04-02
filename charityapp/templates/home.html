@@ -442,30 +442,22 @@
     width: 100%;  /* Makes the width 100% to fill the available space */
 }
 
-
-
-    /* Hide fallback image on small screens */
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
         /* Ensure video shows on smaller devices */
         #background-video {
             display: block; /* Video is visible on all screens */
         }
     }
 
-    /* For better handling of content visibility */
-    .get-involved {
-        position: relative; /* Keep content above the video */
-        z-index: 1;
-    }
 
 </style>
 
 <!-- Hero Start -->
-<div class="container-fluid hero-header">
+
+<div class="container-fluid hero-header" >
     <!-- Background Video -->
-    <video id="backgroundVideo" autoplay muted loop playsinline class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" preload="auto">
-        <source src="{% static 'video/kid3.webm' %}" type="video/webm">
-        <source src="{% static 'video/kid3.mp4' %}" type="video/mp4">
+    <video id="backgroundVideo" autoplay muted loop class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" autoplay muted loop preload="auto">
+        <source id="videoSource" src="{% static 'video/kid3.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -481,18 +473,6 @@
         </div>
     </div>
 </div>
-
-<!-- Optional Custom CSS for Better Mobile Experience -->
-<style>
-    @media (max-width: 768px) {
-        /* Adjust height for smaller screens */
-        #backgroundVideo {
-            height: 100vh; /* Full height on small screens */
-        }
-    }
-</style>
-
-
 
 <!-- Hero End -->
 
@@ -691,9 +671,9 @@
     </div>
 </div>
 
+
 <section class="get-involved py-5">
-    <!-- Background Video -->
-    <video id="background-video" autoplay muted loop playsinline class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" preload="auto">
+    <video autoplay muted loop id="background-video">
         <source src="{% static 'video/s2.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -749,10 +729,6 @@
         </div>
     </div>
 </section>
-
-
-
-
 
 
 
