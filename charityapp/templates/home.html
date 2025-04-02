@@ -483,12 +483,17 @@
         fallbackImage.style.display = 'block'; // Show fallback image if video fails
     };
 
-    // Additional check to make sure the video is actually playing
+    // Check if the video is playing or if it is paused due to autoplay restrictions
     video.oncanplaythrough = function() {
         fallbackImage.style.display = 'none'; // Hide fallback image if video is ready to play
     };
-</script>
 
+    // Check if the video is not playing after a delay and force the fallback image to show
+    setTimeout(function() {
+        if (!video.paused) return;
+        fallbackImage.style.display = 'block'; // Force fallback image if video is not playing
+    }, 3000); // Timeout duration in milliseconds (3 seconds)
+</script>
 
 <!-- Hero End -->
 
