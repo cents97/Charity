@@ -468,10 +468,8 @@
         Your browser does not support the video tag.
     </video>
 
-    <!-- Fallback Image -->
-    <div id="fallbackImage" class="w-100 position-absolute top-0 start-0" style="z-index: -1; display: none;">
-        <img src="{% static 'img/c4.jpg' %}" alt="Fallback image" class="w-100" />
-    </div>
+    <!-- Fallback Background Image -->
+    <div id="fallbackImage"></div>
 
     <div class="container">
         <div class="row">
@@ -507,6 +505,7 @@
         fallbackImage.style.display = 'block'; // Force fallback image if video is not playing
     }, 3000); // Timeout duration in milliseconds (3 seconds)
 </script>
+
 
 <!-- Hero End -->
 
