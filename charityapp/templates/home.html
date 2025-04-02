@@ -443,12 +443,29 @@
 }
 
 @media (max-width: 768px) {
-        /* Ensure video shows on smaller devices */
-        #background-video {
-            display: block; /* Video is visible on all screens */
+        #backgroundVideo {
+            height: 100vh; /* Set the height to 100% of the viewport */
+        }
+
+        .hero-header-inner {
+            padding: 20px; /* Add padding to prevent the content from touching the edges */
+        }
+
+        .hero-header-inner h1 {
+            font-size: 2rem; /* Reduce font size for smaller screens */
+            margin-bottom: 20px; /* Space out the heading and button */
+        }
+
+        .hero-header-inner p {
+            font-size: 1rem; /* Adjust font size for small screens */
+            margin-bottom: 20px; /* Add spacing between text */
+        }
+
+        .btn {
+            font-size: 1rem; /* Adjust button font size */
+            padding: 12px 20px; /* Adjust button padding for small screens */
         }
     }
-
 
 </style>
 
