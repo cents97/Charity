@@ -447,15 +447,18 @@
 
 <!-- Hero Start -->
 
-<div class="container-fluid hero-header position-relative">
+<div class="container-fluid hero-header position-relative" style="min-height: 100vh; overflow: hidden;">
     <!-- Background Video -->
-    <video id="backgroundVideo" autoplay muted loop playsinline class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100vw; height: 100vh; z-index: -1;" preload="auto" onerror="showFallback()">
+    <video id="backgroundVideo" autoplay muted loop playsinline class="position-absolute top-0 start-0 w-100 h-100 d-none d-md-block"
+        style="object-fit: cover; z-index: -1;" preload="auto" onerror="showFallback()">
         <source src="{% static 'video/kid3.mp4' %}" type="video/mp4">
         <source src="{% static 'video/kid3.webm' %}" type="video/webm">
     </video>
 
-    <!-- Fallback Image -->
-    <img id="fallbackImage" src="{% static 'img/crying.jpg' %}" alt="Fallback image" class="position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover; z-index: -1; display: none;">
+    <!-- Fallback Image (Always Show on Phones) -->
+    <img id="fallbackImage" src="{% static 'img/crying.jpg' %}" alt="Fallback image" 
+        class="position-absolute top-0 start-0 w-100 h-100 d-block" 
+        style="object-fit: cover; z-index: -1;">
 
     <div class="container position-relative" style="z-index: 1;">
         <div class="row">
@@ -476,12 +479,12 @@
         document.getElementById('fallbackImage').style.display = 'block';
     }
 
-    // If video is not playing after 3 seconds, show the fallback image
-    setTimeout(function() {
+    document.addEventListener("DOMContentLoaded", function() {
         var video = document.getElementById('backgroundVideo');
-        if (!video.paused) return;
-        showFallback();
-    }, 3000);
+        if (!video || video.paused) {
+            showFallback();
+        }
+    });
 </script>
 
 
