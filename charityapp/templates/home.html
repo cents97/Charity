@@ -442,19 +442,6 @@
     width: 100%;  /* Makes the width 100% to fill the available space */
 }
 
-#fallbackImage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: url("{% static 'img/c4.jpg' %}") no-repeat center center;
-    background-size: cover;
-    display: none;
-}
-
-
 
 </style>
 
@@ -462,14 +449,13 @@
 
 <div class="container-fluid hero-header">
     <!-- Background Video -->
-    <video id="backgroundVideo" autoplay muted loop playsinline class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" preload="auto">
-        <source id="videoSource" src="{% static 'video/kid3.mp4' %}" type="video/mp4">
-        <source id="videoSourceWebm" src="{% static 'video/kid3.webm' %}" type="video/webm">
-        Your browser does not support the video tag.
+    <video id="backgroundVideo" autoplay muted loop playsinline class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" preload="auto" onerror="showFallback()">
+        <source src="{% static 'video/kid3.mp4' %}" type="video/mp4">
+        <source src="{% static 'video/kid3.webm' %}" type="video/webm">
     </video>
 
-    <!-- Fallback Background Image -->
-    <div id="fallbackImage"></div>
+    <!-- Fallback Image -->
+    <img id="fallbackImage" src="{% static 'img/street.jpg' %}" alt="Fallback image" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1; display: none;">
 
     <div class="container">
         <div class="row">
@@ -485,25 +471,17 @@
 </div>
 
 <script>
-    // Check if the video has failed to load or play
-    var video = document.getElementById('backgroundVideo');
-    var fallbackImage = document.getElementById('fallbackImage');
+    function showFallback() {
+        document.getElementById('backgroundVideo').style.display = 'none';
+        document.getElementById('fallbackImage').style.display = 'block';
+    }
 
-    // Event listener for video error
-    video.onerror = function() {
-        fallbackImage.style.display = 'block'; // Show fallback image if video fails
-    };
-
-    // Check if the video is playing or if it is paused due to autoplay restrictions
-    video.oncanplaythrough = function() {
-        fallbackImage.style.display = 'none'; // Hide fallback image if video is ready to play
-    };
-
-    // Check if the video is not playing after a delay and force the fallback image to show
+    // If video is not playing after 3 seconds, show the fallback image
     setTimeout(function() {
+        var video = document.getElementById('backgroundVideo');
         if (!video.paused) return;
-        fallbackImage.style.display = 'block'; // Force fallback image if video is not playing
-    }, 3000); // Timeout duration in milliseconds (3 seconds)
+        showFallback();
+    }, 3000);
 </script>
 
 
