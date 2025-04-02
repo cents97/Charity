@@ -455,7 +455,7 @@
     </video>
 
     <!-- Fallback Image -->
-    <img id="fallbackImage" src="{% static 'img/street.jpg' %}" alt="Fallback image" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1; display: none;">
+    <img id="fallbackImage" src="{% static 'img/crying.jpg' %}" alt="Fallback image" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1; display: none;">
 
     <div class="container">
         <div class="row">
@@ -683,13 +683,16 @@
 </div>
 
 
-<section class="get-involved py-5">
-    <video autoplay muted loop id="background-video">
+<section class="get-involved py-5 position-relative">
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline id="background-video" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" onerror="showFallback()">
         <source src="{% static 'video/s2.mp4' %}" type="video/mp4">
-        Your browser does not support the video tag.
     </video>
 
-    <div class="container text-center">
+    <!-- Fallback Image -->
+    <img id="fallback-image" src="{% static 'img/street.jpg' %}" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1; display: none;">
+
+    <div class="container text-center position-relative" style="z-index: 1;">
         <h2 class="section-title wow fadeInDown" data-wow-duration="1s">How to Get Involved</h2>
         <p class="section-subtitle wow fadeIn" data-wow-delay="0.2s">Join us in making a difference—choose how you want to help.</p>
         
@@ -740,6 +743,21 @@
         </div>
     </div>
 </section>
+
+<script>
+    function showFallback() {
+        document.getElementById('background-video').style.display = 'none';
+        document.getElementById('fallback-image').style.display = 'block';
+    }
+
+    // Check if the video is playing; if not, show the fallback image
+    setTimeout(function() {
+        var video = document.getElementById('background-video');
+        if (!video.paused) return;
+        showFallback();
+    }, 3000);
+</script>
+
 
 
 
