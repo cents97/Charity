@@ -441,6 +441,20 @@
     object-fit: cover;  /* Ensures the image maintains aspect ratio and fills the area without distortion */
     width: 100%;  /* Makes the width 100% to fill the available space */
 }
+#fallbackImage {
+    object-fit: cover; /* Cover the full section */
+    object-position: center; /* Center the image */
+    width: 100%;
+    height: 100%;
+}
+
+/* Adjust for small screens */
+@media (max-width: 768px) {
+    #fallbackImage {
+        object-fit: contain; /* Show the full image without cropping */
+    }
+}
+
 
 
 </style>
@@ -448,7 +462,7 @@
 <!-- Hero Start -->
 
 <div class="container-fluid hero-header position-relative" style="min-height: 100vh; overflow: hidden;">
-    <!-- Background Video -->
+    <!-- Background Video (only on large screens) -->
     <video id="backgroundVideo" autoplay muted loop playsinline class="position-absolute top-0 start-0 w-100 h-100 d-none d-md-block"
         style="object-fit: cover; z-index: -1;" preload="auto" onerror="showFallback()">
         <source src="{% static 'video/kid3.mp4' %}" type="video/mp4">
@@ -456,9 +470,9 @@
     </video>
 
     <!-- Fallback Image (Always Show on Phones) -->
-    <img id="fallbackImage" src="{% static 'img/crying.jpg' %}" alt="Fallback image" 
-        class="position-absolute top-0 start-0 w-100 h-100 d-block" 
-        style="object-fit: cover; z-index: -1;">
+    <img id="fallbackImage" src="{% static 'img/street.jpg' %}" alt="Fallback image" 
+        class="position-absolute top-0 start-0 w-100 h-100 d-block d-md-none"
+        style="object-fit: cover; z-index: -1; filter: none;">
 
     <div class="container position-relative" style="z-index: 1;">
         <div class="row">
@@ -479,6 +493,7 @@
         document.getElementById('fallbackImage').style.display = 'block';
     }
 
+    // Check if video is paused or not loaded properly
     document.addEventListener("DOMContentLoaded", function() {
         var video = document.getElementById('backgroundVideo');
         if (!video || video.paused) {
@@ -486,6 +501,7 @@
         }
     });
 </script>
+
 
 
 <!-- Hero End -->
@@ -686,22 +702,20 @@
 </div>
 
 
-<section class="get-involved py-5 position-relative" style="min-height: 100vh; overflow: hidden;">
+<section class="get-involved py-5 position-relative" style="min-height: 60vh; overflow: hidden;">
     <!-- Background Video -->
-    <video autoplay muted loop playsinline id="background-video" class="position-absolute top-0 start-0 w-100 h-100" 
-        style="object-fit: cover; z-index: -1;" onerror="showFallback()">
+    <video autoplay muted loop playsinline id="background-video" class="position-absolute top-0 start-0 w-100 h-100 d-none d-md-block" 
+        style="object-fit: cover; z-index: -1;" preload="auto" onerror="showFallback()">
         <source src="{% static 'video/s2.mp4' %}" type="video/mp4">
     </video>
 
-    <!-- Fallback Image -->
-    <img id="fallback-image" src="{% static 'img/street.jpg' %}" class="position-absolute top-0 start-0 w-100 h-100" 
-        style="object-fit: cover; z-index: -1; display: none;">
+    <!-- Fallback Image (Always Show on Phones) -->
+    <img id="fallback-image" src="{% static 'img/c3.jpg' %}" class="position-absolute top-0 start-0 w-100 h-100 d-block d-md-none" 
+        style="object-fit: cover; z-index: -1; filter: none;">
 
     <div class="container text-center position-relative" style="z-index: 1;">
         <h2 class="section-title wow fadeInDown" data-wow-duration="1s">How to Get Involved</h2>
-        <p class="section-subtitle wow fadeIn" data-wow-delay="0.2s">
-            Join us in making a difference—choose how you want to help.
-        </p>
+        <p class="section-subtitle wow fadeIn" data-wow-delay="0.2s">Join us in making a difference—choose how you want to help.</p>
         
         <div class="row g-4">
             <div class="col-md-6 col-lg-3 wow zoomIn" data-wow-delay="0.4s">
@@ -763,7 +777,14 @@
         if (!video.paused) return;
         showFallback();
     }, 3000);
+
+    // Optionally check for mobile devices, you could add more checks if necessary
+    if (window.innerWidth <= 767) {
+        document.getElementById('background-video').style.display = 'none';
+        document.getElementById('fallback-image').style.display = 'block';
+    }
 </script>
+
 
 
 
