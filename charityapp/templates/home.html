@@ -447,17 +447,17 @@
 
 <!-- Hero Start -->
 
-<div class="container-fluid hero-header">
+<div class="container-fluid hero-header position-relative">
     <!-- Background Video -->
-    <video id="backgroundVideo" autoplay muted loop playsinline class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" preload="auto" onerror="showFallback()">
+    <video id="backgroundVideo" autoplay muted loop playsinline class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100vw; height: 100vh; z-index: -1;" preload="auto" onerror="showFallback()">
         <source src="{% static 'video/kid3.mp4' %}" type="video/mp4">
         <source src="{% static 'video/kid3.webm' %}" type="video/webm">
     </video>
 
     <!-- Fallback Image -->
-    <img id="fallbackImage" src="{% static 'img/crying.jpg' %}" alt="Fallback image" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1; display: none;">
+    <img id="fallbackImage" src="{% static 'img/crying.jpg' %}" alt="Fallback image" class="position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover; z-index: -1; display: none;">
 
-    <div class="container">
+    <div class="container position-relative" style="z-index: 1;">
         <div class="row">
             <div class="col-lg-7">
                 <div class="hero-header-inner animated zoomIn">
@@ -683,18 +683,22 @@
 </div>
 
 
-<section class="get-involved py-5 position-relative">
+<section class="get-involved py-5 position-relative" style="min-height: 100vh; overflow: hidden;">
     <!-- Background Video -->
-    <video autoplay muted loop playsinline id="background-video" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" onerror="showFallback()">
+    <video autoplay muted loop playsinline id="background-video" class="position-absolute top-0 start-0 w-100 h-100" 
+        style="object-fit: cover; z-index: -1;" onerror="showFallback()">
         <source src="{% static 'video/s2.mp4' %}" type="video/mp4">
     </video>
 
     <!-- Fallback Image -->
-    <img id="fallback-image" src="{% static 'img/street.jpg' %}" class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1; display: none;">
+    <img id="fallback-image" src="{% static 'img/street.jpg' %}" class="position-absolute top-0 start-0 w-100 h-100" 
+        style="object-fit: cover; z-index: -1; display: none;">
 
     <div class="container text-center position-relative" style="z-index: 1;">
         <h2 class="section-title wow fadeInDown" data-wow-duration="1s">How to Get Involved</h2>
-        <p class="section-subtitle wow fadeIn" data-wow-delay="0.2s">Join us in making a difference—choose how you want to help.</p>
+        <p class="section-subtitle wow fadeIn" data-wow-delay="0.2s">
+            Join us in making a difference—choose how you want to help.
+        </p>
         
         <div class="row g-4">
             <div class="col-md-6 col-lg-3 wow zoomIn" data-wow-delay="0.4s">
