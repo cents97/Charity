@@ -442,9 +442,39 @@
     width: 100%;  /* Makes the width 100% to fill the available space */
 }
 
-@media (max-width: 768px) {
+
+</style>
+
+<!-- Hero Start -->
+
+<div class="container-fluid hero-header">
+    <!-- Background Video -->
+    <video id="backgroundVideo" autoplay muted loop playsinline class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" preload="auto">
+        <source id="videoSource" src="{% static 'video/kid3.mp4' %}" type="video/mp4">
+        <source id="videoSourceWebM" src="{% static 'video/kid3.webm' %}" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="hero-header-inner animated zoomIn">
+                    <p class="fs-5 text-dark">WELCOME TO ST.THADDAEUS CHILDREN FOUNDATION LIMITED</p>
+                    <h1 class="display-2 mb-5 text-dark">Changing Lives, One Step at a Time</h1>
+                    <a href="{% url 'about' %}" class="btn btn-primary py-3 px-5">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional Custom CSS for Better Mobile Experience -->
+<style>
+    /* Ensure the video fits well on small screens */
+    @media (max-width: 768px) {
         #backgroundVideo {
             height: 100vh; /* Set the height to 100% of the viewport */
+            object-fit: cover; /* Ensures the video covers the entire screen */
         }
 
         .hero-header-inner {
@@ -467,29 +497,46 @@
         }
     }
 
+    /* For very small screens, ensure the video takes full height */
+    @media (max-width: 480px) {
+        #backgroundVideo {
+            height: auto; /* Allow the video to scale for very small screens */
+            width: 100%; /* Ensure the video fills the screen horizontally */
+        }
+
+        .hero-header-inner {
+            padding: 10px; /* Adjust padding for extra small screens */
+        }
+
+        .hero-header-inner h1 {
+            font-size: 1.5rem; /* Further reduce heading size on very small screens */
+        }
+
+        .hero-header-inner p {
+            font-size: 0.9rem; /* Reduce paragraph font size */
+        }
+
+        .btn {
+            font-size: 0.9rem; /* Adjust button font size */
+            padding: 10px 18px; /* Adjust button padding for very small screens */
+        }
+    }
 </style>
 
-<!-- Hero Start -->
+<!-- JavaScript to enable video autoplay on mobile -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var video = document.getElementById('backgroundVideo');
+        var isMobile = /Mobi/i.test(navigator.userAgent);  // Detect mobile devices
 
-<div class="container-fluid hero-header" >
-    <!-- Background Video -->
-    <video id="backgroundVideo" autoplay muted loop class="w-100 position-absolute top-0 start-0" style="object-fit: cover; width: 100%; height: 100%; z-index: -1;" autoplay muted loop preload="auto">
-        <source id="videoSource" src="{% static 'video/kid3.mp4' %}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+        if (isMobile) {
+            video.play().catch(function(error) {
+                console.log('Autoplay failed on mobile, trying to play manually...');
+            });
+        }
+    });
+</script>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7">
-                <div class="hero-header-inner animated zoomIn">
-                    <p class="fs-5 text-dark">WELCOME TO ST.THADDAEUS CHILDREN FOUNDATION LIMITED</p>
-                    <h1 class="display-2 mb-5 text-dark">Changing Lives, One Step at a Time</h1>
-                    <a href="{% url 'about' %}" class="btn btn-primary py-3 px-5">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Hero End -->
 
