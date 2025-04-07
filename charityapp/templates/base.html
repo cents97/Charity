@@ -111,29 +111,31 @@
             </div>
 
             <div class="container">
-                <nav class="navbar navbar-light navbar-expand-lg py-3">
-                    <div class="d-flex align-items-center">
-                        <!-- Logo -->
-                        <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center">
-                            <img src="{% static 'img/st1.png' %}" alt="Thaddaeus Charity Logo" style="height: 40px; margin-right: 10px;">
-                            <h6 class="mb-0">ST.THADDAEUS <span class="text-primary">CHARITY</span></h6>
-                        </a>
-                    </div>
+                <nav class="navbar navbar-expand-lg navbar-light py-3">
+                    <!-- Logo -->
+                    <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center">
+                        <img src="{% static 'img/st1.png' %}" alt="Thaddaeus Charity Logo" style="height: 40px; margin-right: 10px;">
+                        <h6 class="mb-0">ST.THADDAEUS <span class="text-primary">CHARITY</span></h6>
+                    </a>
             
-                    <!-- Navbar Toggler -->
+                    <!-- Toggle button for mobile -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars text-primary"></span>
+                        <span class="navbar-toggler-icon"></span>
                     </button>
             
-                    <!-- Navbar Links -->
-                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                        <div class="navbar-nav ms-auto d-flex flex-wrap"> <!-- Added flex-wrap -->
-                            <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
-                            <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                    
-                            <!-- Dropdown for What We Do -->
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                    <!-- Navbar links -->
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a href="{% url 'home' %}" class="nav-link active">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'about' %}" class="nav-link">About</a>
+                            </li>
+            
+                            <!-- What We Do Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                     What We Do
                                 </a>
                                 <ul class="dropdown-menu">
@@ -141,16 +143,15 @@
                                     <li><a class="dropdown-item" href="{% url 'spiritual_guidance' %}">Spiritual Guidance</a></li>
                                     <li><a class="dropdown-item" href="{% url 'health_wellness' %}">Health & Wellness</a></li>
                                     <li><a class="dropdown-item" href="{% url 'moral_development' %}">Moral Development</a></li>
-                                    <!-- <li><a class="dropdown-item" href="{% url 'community_outreach' %}">Community Outreach</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'emergency_relief' %}">Emergency Relief</a></li> -->
                                 </ul>
-                            </div>
-                    
+                            </li>
+            
+                            <!-- Get Involved Dropdown -->
                             <li class="nav-item dropdown">
-                                <a href="{% url 'get_involved' %}" class="nav-link dropdown-toggle" id="getInvolvedDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                     Get Involved
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="getInvolvedDropdown">
+                                <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{% url 'donate' %}">Donate</a></li>
                                     <li><a class="dropdown-item" href="{% url 'volunteer' %}">Volunteer</a></li>
                                     <li><a class="dropdown-item" href="{% url 'partnership' %}">Partnership</a></li>
@@ -158,19 +159,26 @@
                                     <li><a class="dropdown-item" href="{% url 'gifts' %}">Gifts</a></li>
                                 </ul>
                             </li>
-                            
+            
+                            <li class="nav-item">
+                                <a href="{% url 'events' %}" class="nav-link">Events</a>
+                                
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'gallery' %}" class="nav-link">Gallery</a>
+                                
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'contact' %}" class="nav-link">Contact Us</a>
+                                
+                            </li>
 
-                            <a href="{% url 'events' %}" class="nav-item nav-link">Events</a>
-                            <a href="{% url 'gallery' %}" class="nav-item nav-link">Gallery</a> <!-- Shortened name -->
-                            <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                        </div>
-                    
-                        <!-- Donate Button -->
-                        <a href="{% url 'donate' %}" class="btn btn-primary py-2 px-4 d-none d-lg-inline-block">Donate</a>
+            
+                        </ul>
                     </div>
-                    
                 </nav>
             </div>
+            
             
             
 

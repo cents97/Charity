@@ -41,6 +41,21 @@
     margin: 0 auto;
 }
 
+/* Responsive h1 Styling */
+.welcome-section h4 {
+    font-size: 2.5rem;
+    word-wrap: break-word; /* Ensure the text breaks properly */
+}
+
+/* Media Query for Small Devices */
+@media (max-width: 768px) {
+    .welcome-section h4 {
+        font-size: 1rem; /* Adjust the font size for smaller devices */
+        white-space: normal; /* Allow wrapping */
+    }
+}
+
+
 .content h1 {
     font-size: 3rem;
     margin-bottom: 20px;
@@ -564,14 +579,51 @@
         transform: scale(1.05);
     }
 
-
-    .team-item img {
-    height: 300px;  /* Set the height for the images */
-    object-fit: cover;  /* Ensures the image maintains aspect ratio and fills the area without distortion */
-    width: 100%;  /* Makes the width 100% to fill the available space */
+/* Ensure images are responsive with consistent height */
+.team-item img {
+    width: 100%;
+    height: 300px; /* Set fixed height */
+    object-fit: cover; /* Maintain aspect ratio without distortion */
+    border-radius: 50%;
+    margin: 0 auto;
 }
 
+/* For small devices (phones and smaller screens) */
+@media (max-width: 767px) {
+    .col-md-4 {
+        flex: 0 0 50%; /* Two items per row on small screens */
+        max-width: 50%;
+        padding: 10px;
+    }
 
+    .team-item img {
+        height: 300px; /* Reduce height on small screens to make images less tall */
+    }
+
+    .team-content {
+        padding: 10px;
+    }
+
+    .team-item-title {
+        font-size: 1.25rem;
+    }
+
+    .text-dark {
+        font-size: 1rem;
+    }
+}
+
+/* For larger devices (Tablets and larger screens) */
+@media (min-width: 768px) {
+    .col-md-4 {
+        flex: 0 0 33.33%; /* Three items per row for larger screens */
+        max-width: 33.33%;
+    }
+
+    .team-item img {
+        height: 300px; /* Ensure images maintain the same height */
+    }
+}
 
 
 
@@ -603,8 +655,8 @@
                 <img src="{% static 'img/5.jpeg' %}" alt="St. Thadeous Charity" />
             </div>
             <div class="content wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                <h1>Welcome to ST.THADDAEUS CHILDREN FOUNDATION LIMITED</h1>
-                <p>At <strong>ST.THADDAEUS CHILDREN FOUNDATION LIMITED</strong>, we are dedicated to transforming the lives of needy children and orphans by ensuring they receive education, spiritual guidance, and moral upbringing. We believe that every child deserves the opportunity to grow in a supportive and nurturing environment, regardless of their background or circumstances. Our commitment extends beyond just providing for their immediate needs, as we aim to empower them to achieve a brighter future and create lasting positive change in their communities.</p>
+                <h3>Welcome to ST.THADDAEUS CHILDREN FOUNDATION LIMITED</h3>
+                <p>At <strong>ST.Thaddeus Children Foundation Limited</strong>, we are dedicated to transforming the lives of needy children and orphans by ensuring they receive education, spiritual guidance, and moral upbringing. We believe that every child deserves the opportunity to grow in a supportive and nurturing environment, regardless of their background or circumstances. Our commitment extends beyond just providing for their immediate needs, as we aim to empower them to achieve a brighter future and create lasting positive change in their communities.</p>
             </div>
         </div>
     </div>

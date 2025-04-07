@@ -457,6 +457,44 @@
 
 
 
+/* For small devices (phones and smaller screens) */
+@media (max-width: 767px) {
+    .col-md-4 {
+        flex: 0 0 50%; /* Two items per row on small screens */
+        max-width: 50%;
+        padding: 10px;
+    }
+
+    .team-item img {
+        height: 300px; /* Reduce height on small screens to make images less tall */
+    }
+
+    .team-content {
+        padding: 10px;
+    }
+
+    .team-item-title {
+        font-size: 1.25rem;
+    }
+
+    
+}
+
+/* For larger devices (Tablets and larger screens) */
+@media (min-width: 768px) {
+    .col-md-4 {
+        flex: 0 0 33.33%; /* Three items per row for larger screens */
+        max-width: 33.33%;
+    }
+
+    .team-item img {
+        height: 300px; /* Ensure images maintain the same height */
+    }
+}
+
+
+
+
 </style>
 
 <!-- Hero Start -->
