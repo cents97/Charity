@@ -58,10 +58,10 @@
 .involve-card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.1);
-    transition: all 0.4s ease-in-out;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
     text-align: center;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -69,43 +69,43 @@
 
 /* Card Hover Effect */
 .involve-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 15px 40px rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
 }
 
 /* Icon Box */
 .icon-bo {
-    font-size: 50px;
+    font-size: 40px;  /* Smaller icons */
     color: #fff;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
-    box-shadow: 0px 0px 20px rgba(255, 117, 140, 0.5);
+    box-shadow: 0px 0px 15px rgba(255, 117, 140, 0.5);
     transition: all 0.3s ease-in-out;
 }
 
-.involve-card:hover .icon-box {
-    transform: scale(1.1);
-    box-shadow: 0px 0px 30px rgba(255, 117, 140, 0.8);
+.involve-card:hover .icon-bo {
+    transform: scale(1.05); /* Slightly zoomed on hover */
+    box-shadow: 0px 0px 25px rgba(255, 117, 140, 0.8);
 }
 
 /* Glassmorphism Button */
 .btn-glass {
     display: inline-block;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-weight: 500;
     text-transform: uppercase;
     text-decoration: none;
-    color: white;
+    color: black;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px); /* Lighter blur effect */
     transition: all 0.3s ease-in-out;
 }
 
@@ -113,6 +113,71 @@
     background: rgba(255, 255, 255, 0.4);
     border: 2px solid white;
     color: black;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 576px) {
+    /* Stack the cards vertically */
+    .row.g-4 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .col-md-6 {
+        max-width: 100%;
+        padding: 10px; /* Less padding */
+    }
+
+    .involve-card {
+        padding: 15px; /* Less padding on smaller screens */
+        width: 100%;
+    }
+
+    /* Adjust icon size */
+    .icon-bo {
+        font-size: 35px; /* Smaller icons for mobile */
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Adjust text size for headings */
+    .section-title {
+        font-size: 2rem; /* Smaller title */
+    }
+
+    .section-subtitle {
+        font-size: 1rem; /* Smaller subtitle */
+    }
+
+    /* Adjust text size for card titles */
+    .involve-card h4 {
+        font-size: 2rem;
+    }
+
+    /* Adjust text size for card descriptions */
+    .involve-card p {
+        font-size: 1.3rem;
+        color: black; /* Change paragraph text to black */
+    }
+
+    /* Adjust button size */
+    .btn-glass {
+        font-size: 1.5rem;
+        padding: 8px 15px;
+    }
+
+    /* Ensure video and fallback image fit well on small screens */
+    #background-video,
+    #fallback-image {
+        object-fit: cover;
+        filter: none;
+    }
+
+    /* Optional: Disable hover effects on small devices */
+    .involve-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
 }
 
 /* Background Styling */
@@ -227,19 +292,7 @@
 }
 
 
-    .event-item {
-        transition: all 0.3s ease-in-out;
-        border-left: 5px solid #007bff;
-    }
-    .event-item:hover {
-        transform: scale(1.02);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    .date-box {
-        background: #f8f9fa;
-        font-size: 1.2rem;
-    }
-
+   
     /* General Styles */
 .section-title {
     font-size: 2.5rem;
@@ -434,6 +487,86 @@
     width: 100%; /* Makes sure it remains responsive */
 }
 
+/* Event Item Styling */
+.event-item {
+    transition: all 0.3s ease-in-out;
+    border-left: 5px solid #007bff;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px;
+}
+
+.event-item:hover {
+    transform: scale(1.02); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Date Box Styling */
+.date-box {
+    background: #f8f9fa; 
+    font-size: 1.2rem;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+    /* Event Item Layout */
+    .event-item {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .event-item h3 {
+        font-size: 1.5rem; /* Slightly smaller heading size for mobile */
+    }
+
+    .event-item p {
+        font-size: 1rem; /* Smaller paragraph size for better readability */
+    }
+
+    /* Event Item Image */
+    .event-item img {
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 15px; /* Space between image and text */
+    }
+
+    /* Date Box */
+    .date-box {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px; /* Space between date box and event description */
+    }
+
+    /* Ensure the buttons look good on mobile */
+    .event-item .btn {
+        width: 100%; /* Full width buttons */
+        margin-top: 10px; /* Space between buttons */
+    }
+
+    .col-3,
+    .col-9 {
+        width: 100%; /* Make the columns full width on mobile */
+    }
+
+    .event-item .col-3 {
+        text-align: center; /* Center date box on mobile */
+    }
+
+    /* Adjusting spacing for smaller screens */
+    .event-item .col-lg-4 {
+        margin-bottom: 15px; /* Add margin below the image for spacing */
+    }
+}
+
+/* Ensure the overall container has good padding */
+.container-fluid.event {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 
 
     .team-item img {
@@ -492,6 +625,15 @@
     }
 }
 
+.hero-header {
+    margin-bottom: 0 !important;
+}
+
+.about {
+    padding-top: 0 !important;
+}
+
+
 
 
 
@@ -499,7 +641,7 @@
 
 <!-- Hero Start -->
 
-<div class="container-fluid hero-header position-relative" style="min-height: 100vh; overflow: hidden;">
+<div class="container-fluid hero-header position-relative" style="min-height: 50vh; overflow: hidden;">
     <!-- Background Video (only on large screens) -->
     <video id="backgroundVideo" autoplay muted loop playsinline class="position-absolute top-0 start-0 w-100 h-100 d-none d-md-block"
         style="object-fit: cover; z-index: -1;" preload="auto" onerror="showFallback()">
@@ -508,7 +650,7 @@
     </video>
 
     <!-- Fallback Image (Always Show on Phones) -->
-    <img id="fallbackImage" src="{% static 'img/street1.jpg' %}" alt="Fallback image" 
+    <img id="fallbackImage" src="{% static 'img/J1.jpeg' %}" alt="Fallback image" 
         class="position-absolute top-0 start-0 w-100 h-100 d-block d-md-none"
         style="object-fit: cover; z-index: -1; filter: none;">
 
@@ -540,10 +682,7 @@
     });
 </script>
 
-
-
 <!-- Hero End -->
-
 <!-- About Start -->
 
 <div class="container-fluid about py-5" style="background-color: #f0f7ff;">
@@ -607,13 +746,13 @@
             </div>
         </div>
 
-        <div class="container text-center py-5 wow fadeIn" data-wow-delay="0.1s" style="background-color: #2980b9; border-radius: 25px;">
+        <div class="container text-center py-3 wow fadeIn" data-wow-delay="0.1s" style="background-color: #2980b9; border-radius: 25px;">
             <div class="row g-4 align-items-center">
                 <div class="col-lg-2">
                     <i class="fas fa-hands-helping fa-5x text-white"></i>
                 </div>
                 <div class="col-lg-7 text-center text-lg-start">
-                    <h1 class="mb-0 text-white" style="font-size: 2rem; font-family: 'Roboto', sans-serif; font-weight: bold; text-transform: uppercase;">Your Support Can Change Lives—Join Us Today</h1>
+                    <h1 class="mb-0 text-white" style="font-size: 1.5rem; font-family: 'Roboto', sans-serif; font-weight: bold; text-transform: uppercase;">Your Support Can Change Lives—Join Us Today</h1>
                 </div>
                 <div class="col-lg-3">
                     <a href="{% url 'donate' %}" class="btn btn-light py-3 px-5" style="border-radius: 30px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Donate Now</a>
@@ -633,7 +772,7 @@
     <div style="background: rgba(0, 0, 0, 0.3); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
 
     <div class="container text-center" style="position: relative; z-index: 1;">
-        <h2 class="display-5 text-white mb-5 wow fadeInDown" data-wow-delay="0.3s" style="font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 3rem;">Our Impact in Numbers</h2>
+        <h2 class="display-5 text-white mb-3 wow fadeInDown" data-wow-delay="0.3s" style="font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 2.8rem;">Our Impact in Numbers</h2>
         <div class="row g-4">
             <!-- Impact Box 1 -->
             <div class="col-md-3">
@@ -740,7 +879,7 @@
 </div>
 
 
-<section class="get-involved py-5 position-relative" style="min-height: 60vh; overflow: hidden;">
+<section class="get-involved py-5 position-relative" style="min-height: 40vh; overflow: hidden;">
     <!-- Background Video -->
     <video autoplay muted loop playsinline id="background-video" class="position-absolute top-0 start-0 w-100 h-100 d-none d-md-block" 
         style="object-fit: cover; z-index: -1;" preload="auto" onerror="showFallback()">
@@ -748,7 +887,7 @@
     </video>
 
     <!-- Fallback Image (Always Show on Phones) -->
-    <img id="fallback-image" src="{% static 'img/c3.jpg' %}" class="position-absolute top-0 start-0 w-100 h-100 d-block d-md-none" 
+    <img id="fallback-image" src="{% static 'img/J1.jpeg' %}" class="position-absolute top-0 start-0 w-100 h-100 d-block d-md-none" 
         style="object-fit: cover; z-index: -1; filter: none;">
 
     <div class="container text-center position-relative" style="z-index: 1;">
